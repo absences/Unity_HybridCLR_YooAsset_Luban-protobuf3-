@@ -1,0 +1,238 @@
+syntax = "proto3";
+
+package cfg;
+
+enum ItemEQuality {
+    ItemEQuality_EMPTY_PLACEHOLDER = 0;
+    ItemEQuality_WHITE = 1;
+    ItemEQuality_BLUE = 2;
+    ItemEQuality_PURPLE = 3;
+    ItemEQuality_RED = 4;
+}
+enum TestAccessFlag {
+    TestAccessFlag_EMPTY_PLACEHOLDER = 0;
+    TestAccessFlag_WRITE = 1;
+    TestAccessFlag_READ = 2;
+    TestAccessFlag_TRUNCATE = 4;
+    TestAccessFlag_NEW = 8;
+    TestAccessFlag_READ_WRITE = 3;
+}
+enum EntityType {
+    EntityType_EMPTY_PLACEHOLDER = 0;
+    EntityType_Enemy = 1;
+    EntityType_Player = 2;
+    EntityType_Spawner = 3;
+}
+enum ColliderLayer {
+    ColliderLayer_EMPTY_PLACEHOLDER = 0;
+    ColliderLayer_Static = 1;
+    ColliderLayer_Enemy = 2;
+    ColliderLayer_Hero = 4;
+    ColliderLayer_Static_Enemy = 3;
+    ColliderLayer_Static_Hero = 5;
+    ColliderLayer_Enemy_Hero = 6;
+    ColliderLayer_Static_Enemy_Hero = 7;
+}
+enum EShape2D {
+    EShape2D_EMPTY_PLACEHOLDER = 0;
+    EShape2D_Segment = 1;
+    EShape2D_Ray = 2;
+    EShape2D_Circle = 3;
+    EShape2D_AABB = 4;
+    EShape2D_OBB = 5;
+    EShape2D_Polygon = 6;
+}
+
+message L10nLanPatch {
+     string key = 1 ;
+     string value = 2 ;
+}
+message EntityConfig {
+     int32 id = 1 ;
+     string Name = 2 ;
+     int32 AssetId = 3 ;
+     int32 SkillID = 4 ;
+     int32 initHp = 5 ;
+     int32 maxHp = 6 ;
+     int32 basicLifeRecovery = 7 ;
+     int32 moveSpeed = 8 ;
+     int32 EntityGroupId = 9 ;
+     ColliderLayer ColliderLayer = 10 ;
+     ColliderColliderData colliderData = 11 ;
+}
+message ColliderColliderData {
+     Lmathvector2 offest = 1 ;
+     ColliderShape2D shape = 2 ;
+}
+message Lmathvector2 {
+     int32 x = 1 ;
+     int32 y = 2 ;
+}
+message ColliderShape2D {
+    oneof value {
+        ColliderSegment Segment = 1;
+        ColliderRay Ray = 2;
+        ColliderCircle Circle = 3;
+        ColliderAABB AABB = 4;
+        ColliderOBB OBB = 5;
+    }
+}
+message ColliderSegment {
+     Lmathvector2 pos1 = 1 ;
+     Lmathvector2 pos2 = 2 ;
+}
+message ColliderRay {
+     Lmathvector2 pos = 1 ;
+     Lmathvector2 dir = 2 ;
+}
+message ColliderCircle {
+     int32 radius = 1 ;
+}
+message ColliderAABB {
+     int32 x = 1 ;
+     int32 y = 2 ;
+}
+message ColliderOBB {
+     int32 x = 1 ;
+     int32 y = 2 ;
+     int32 deg = 3 ;
+}
+message PoolParamConfig {
+     int32 id = 1 ;
+     string GroupName = 2 ;
+     float InstanceAutoReleaseInterval = 3 ;
+     int32 InstanceCapacity = 4 ;
+     float InstanceExpireTime = 5 ;
+     int32 InstancePriority = 6 ;
+}
+message EntityGroupConfig {
+     int32 id = 1 ;
+     string Name = 2 ;
+     int32 PoolParamId = 3 ;
+}
+message AssetsPathConfig {
+     int32 id = 1 ;
+     string AssetPath = 2 ;
+}
+message CollisionConfig {
+     map<int32, ColliderLayer> collisionMatrix = 1 ;
+     Lmathvector3 pos = 2 ;
+     int32 worldSize = 3 ;
+     int32 minNodeSize = 4 ;
+     int32 loosenessval = 5 ;
+}
+message Lmathvector3 {
+     int32 x = 1 ;
+     int32 y = 2 ;
+     int32 z = 3 ;
+}
+message SkillInfoConfig {
+     int32 id = 1 ;
+     map<int32, Heroskillitem> skills = 2 ;
+     string name = 3 ;
+}
+message Heroskillitem {
+     string name = 1 ;
+     int32 asset = 2 ;
+}
+message ItemTestConfig {
+     int32 id = 1 ;
+     string name = 2 ;
+     string desc = 3 ;
+     int32 price = 4 ;
+    optional int64 expire_time = 5 ;
+     bool batch_useable = 6 ;
+}
+message UIEntityConfig {
+     int32 id = 1 ;
+     string Name = 2 ;
+     int32 AssetId = 3 ;
+     int32 EntityGroupId = 4 ;
+}
+message SoundConstantConfig {
+     float DefaultTime = 1 ;
+     bool DefaultMute = 2 ;
+     bool DefaultLoop = 3 ;
+     int32 DefaultPriority = 4 ;
+     float DefaultVolume = 5 ;
+     float DefaultFadeInSeconds = 6 ;
+     float DefaultFadeOutSeconds = 7 ;
+     float DefaultPitch = 8 ;
+     float DefaultPanStereo = 9 ;
+     float DefaultSpatialBlend = 10 ;
+     float DefaultMaxDistance = 11 ;
+     float DefaultDopplerLevel = 12 ;
+}
+message SoundConfig {
+     int32 id = 1 ;
+     int32 AssetID = 2 ;
+     int32 SoundGroupId = 3 ;
+     int32 SoundPlayParamId = 4 ;
+}
+message SoundGroupConfig {
+     int32 id = 1 ;
+     string Name = 2 ;
+     int32 SoundAgentCount = 3 ;
+     bool AvoidBeingReplacedBySamePriority = 4 ;
+     bool Mute = 5 ;
+     float Volume = 6 ;
+}
+message SoundParamConfig {
+     int32 id = 1 ;
+     float time = 2 ;
+     bool mute = 3 ;
+     bool loop = 4 ;
+     int32 Priority = 5 ;
+     float Volume = 6 ;
+     float FadeInSeconds = 7 ;
+     float Pitch = 8 ;
+     float PanStereo = 9 ;
+     float SpatialBlend = 10 ;
+     float MaxDistance = 11 ;
+     float DopplerLevel = 12 ;
+}
+
+message L10nlanguage_ch {
+    repeated L10nLanPatch data_list = 1 [packed = false];
+}
+message L10nlanguage_en {
+    repeated L10nLanPatch data_list = 1 [packed = false];
+}
+message EntityCfgs {
+    repeated EntityConfig data_list = 1 [packed = false];
+}
+message PoolParamCfgs {
+    repeated PoolParamConfig data_list = 1 [packed = false];
+}
+message EntityGroupCfgs {
+    repeated EntityGroupConfig data_list = 1 [packed = false];
+}
+message AssetsPathCfgs {
+    repeated AssetsPathConfig data_list = 1 [packed = false];
+}
+message CollisionCfgs {
+    repeated CollisionConfig data_list = 1 [packed = false];
+}
+message SkillInfoCfgs {
+    repeated SkillInfoConfig data_list = 1 [packed = false];
+}
+message ItemTestCfgs {
+    repeated ItemTestConfig data_list = 1 [packed = false];
+}
+message UIEntityCfgs {
+    repeated UIEntityConfig data_list = 1 [packed = false];
+}
+message SoundConstantCfgs {
+    repeated SoundConstantConfig data_list = 1 [packed = false];
+}
+message SoundCfgs {
+    repeated SoundConfig data_list = 1 [packed = false];
+}
+message SoundGroupCfgs {
+    repeated SoundGroupConfig data_list = 1 [packed = false];
+}
+message SoundParamCfgs {
+    repeated SoundParamConfig data_list = 1 [packed = false];
+}
+
+

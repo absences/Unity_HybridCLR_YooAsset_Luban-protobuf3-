@@ -1,0 +1,8 @@
+<module name="l10n">
+	<bean name="LanPatch">
+		<var name="key" type="string"/>
+		<var name="value" type="string"/>
+	</bean>
+	<table name="language_ch" value="LanPatch" input="l10n\Language_ch.xlsx"/>
+	<table name="language_en" value="LanPatch" input="l10n\Language_en.xlsx"/>
+</module>
