@@ -7,110 +7,108 @@ using YooAsset.Editor;
 
 public class AutoBuild
 {
+    //[MenuItem("Tools/BuildWholePack")]
+    //static void BuildWholePack()
+    //{
+    //    var version = AddAppVersion();
+    //    SetPackageVersion(version.ToString());
+    //    var scene = EditorSceneManager.OpenScene(EditorBuildSettings.scenes[0].path);
+    //    var resource = GameObject.FindObjectOfType<ResourceComponent>();
+    //    resource.AppVersion = version;
+    //    resource.VersionType = "dev";
+    //    resource.PlayMode = YooAsset.EPlayMode.OfflinePlayMode;
+    //    resource.BackUpResourceSourceUrl = "";
+    //    resource.ResourceSourceUrl = "";
+    //    EditorSceneManager.SaveScene(scene);
 
+    //    // HybridCLR编译代码
+    //    HybridCLREditor.CompileDll();
 
-    [MenuItem("Tools/BuildWholePack")]
-    static void BuildWholePack()
-    {
-        var version = AddAppVersion();
-        SetPackageVersion(version.ToString());
-        var scene = EditorSceneManager.OpenScene(EditorBuildSettings.scenes[0].path);
-        var resource = GameObject.FindObjectOfType<ResourceComponent>();
-        resource.AppVersion = version;
-        resource.VersionType = "dev";
-        resource.PlayMode = YooAsset.EPlayMode.OfflinePlayMode;
-        resource.BackUpResourceSourceUrl = "";
-        resource.ResourceSourceUrl = "";
-        EditorSceneManager.SaveScene(scene);
+    //    //收集shader变体
+    //    //CollectSVC();
 
-        // HybridCLR编译代码
-        HybridCLREditor.CompileDll();
-
-        //收集shader变体
-        //CollectSVC();
-
-        var pkgversion = AddPackageVersion();
-        //整包参数
-        YooAssetsBuild(pkgversion, EBuildinFileCopyOption.ClearAndCopyAll, null, false, null);
+    //    var pkgversion = AddPackageVersion();
+    //    //整包参数
+    //    YooAssetsBuild(pkgversion, EBuildinFileCopyOption.ClearAndCopyAll, null, false, null);
 
 
 
-        BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;//构建平台
-        string savePath = "";
-        if (buildTarget == BuildTarget.Android)
-        {
-            bool aab = false;
-            PlayerSettings.Android.bundleVersionCode = version;
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
+    //    BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;//构建平台
+    //    string savePath = "";
+    //    if (buildTarget == BuildTarget.Android)
+    //    {
+    //        bool aab = false;
+    //        PlayerSettings.Android.bundleVersionCode = version;
+    //        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
 
-            EditorUserBuildSettings.buildAppBundle = aab;
-            PlayerSettings.Android.useAPKExpansionFiles = aab;
+    //        EditorUserBuildSettings.buildAppBundle = aab;
+    //        PlayerSettings.Android.useAPKExpansionFiles = aab;
 
-            savePath = Application.dataPath.Replace("Assets", "AutoBuild")
-                + (aab ? "/AutoBuild.aab" : "/AutoBuild.apk");
-        }
+    //        savePath = Application.dataPath.Replace("Assets", "AutoBuild")
+    //            + (aab ? "/AutoBuild.aab" : "/AutoBuild.apk");
+    //    }
 
-        else if (buildTarget == BuildTarget.iOS)
-        {
-            PlayerSettings.iOS.buildNumber = version.ToString();
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
+    //    else if (buildTarget == BuildTarget.iOS)
+    //    {
+    //        PlayerSettings.iOS.buildNumber = version.ToString();
+    //        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
 
-            savePath = Application.dataPath.Replace("Assets", "AutoBuild") + "/clientIOS";
-        }
+    //        savePath = Application.dataPath.Replace("Assets", "AutoBuild") + "/clientIOS";
+    //    }
 
-        BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, EditorUserBuildSettings.activeBuildTarget,
-          false ? BuildOptions.Development : BuildOptions.None);
-    }
-    [MenuItem("Tools/BuildHotUpdatePack")]
-    static void BuildHotUpdatePack()
-    {
-        var version = AddAppVersion();
-        SetPackageVersion(version.ToString());
-        var scene = EditorSceneManager.OpenScene(EditorBuildSettings.scenes[0].path);
-        var resource = GameObject.FindObjectOfType<ResourceComponent>();
-        resource.AppVersion = version;
-        resource.VersionType = "release";
-        resource.PlayMode = YooAsset.EPlayMode.HostPlayMode;
-        resource.BackUpResourceSourceUrl = "http://192.168.3.60";
-        resource.ResourceSourceUrl = "http://192.168.3.60";
-        EditorSceneManager.SaveScene(scene);
+    //    BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, EditorUserBuildSettings.activeBuildTarget,
+    //      false ? BuildOptions.Development : BuildOptions.None);
+    //}
+    //[MenuItem("Tools/BuildHotUpdatePack")]
+    //static void BuildHotUpdatePack()
+    //{
 
-        // HybridCLR编译代码
-        HybridCLREditor.CompileDll();
+    //    SetPackageVersion(version.ToString());
+    //    var scene = EditorSceneManager.OpenScene(EditorBuildSettings.scenes[0].path);
+    //    var resource = GameObject.FindObjectOfType<ResourceComponent>();
+    //    resource.AppVersion = version;
+    //    resource.VersionType = "release";
+    //    resource.PlayMode = YooAsset.EPlayMode.HostPlayMode;
+    //    resource.BackUpResourceSourceUrl = "http://192.168.3.60";
+    //    resource.ResourceSourceUrl = "http://192.168.3.60";
+    //    EditorSceneManager.SaveScene(scene);
 
-        //收集shader变体
-        //CollectSVC();
+    //    // HybridCLR编译代码
+    //    HybridCLREditor.CompileDll();
 
-        var pkgversion = AddPackageVersion();
-        //热更参数
-        YooAssetsBuild(pkgversion, EBuildinFileCopyOption.ClearAndCopyByTags, "prefab", true, new string[] { "config" });
+    //    //收集shader变体
+    //    //CollectSVC();
 
-        BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;//构建平台
-        string savePath = "";
-        if (buildTarget == BuildTarget.Android)
-        {
-            bool aab = false;
-            PlayerSettings.Android.bundleVersionCode = version;
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
 
-            EditorUserBuildSettings.buildAppBundle = aab;
-            PlayerSettings.Android.useAPKExpansionFiles = aab;
+    //    //热更参数
+    //    YooAssetsBuild(pkgversion, EBuildinFileCopyOption.ClearAndCopyByTags, "prefab", true, new string[] { "config" });
 
-            savePath = Application.dataPath.Replace("Assets", "AutoBuild")
-                + (aab ? "/AutoBuild.aab" : "/AutoBuild.apk");
-        }
+    //    BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;//构建平台
+    //    string savePath = "";
+    //    if (buildTarget == BuildTarget.Android)
+    //    {
+    //        bool aab = false;
+    //        PlayerSettings.Android.bundleVersionCode = version;
+    //        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
 
-        else if (buildTarget == BuildTarget.iOS)
-        {
-            PlayerSettings.iOS.buildNumber = version.ToString();
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
+    //        EditorUserBuildSettings.buildAppBundle = aab;
+    //        PlayerSettings.Android.useAPKExpansionFiles = aab;
 
-            savePath = Application.dataPath.Replace("Assets", "AutoBuild") + "/clientIOS";
-        }
+    //        savePath = Application.dataPath.Replace("Assets", "AutoBuild")
+    //            + (aab ? "/AutoBuild.aab" : "/AutoBuild.apk");
+    //    }
 
-        BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, EditorUserBuildSettings.activeBuildTarget,
-          false ? BuildOptions.Development : BuildOptions.None);
-    }
+    //    else if (buildTarget == BuildTarget.iOS)
+    //    {
+    //        PlayerSettings.iOS.buildNumber = version.ToString();
+    //        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "ENABLE_LOG");
+
+    //        savePath = Application.dataPath.Replace("Assets", "AutoBuild") + "/clientIOS";
+    //    }
+
+    //    BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, EditorUserBuildSettings.activeBuildTarget,
+    //      false ? BuildOptions.Development : BuildOptions.None);
+    //}
     [MenuItem("Tools/BuildHotUpdate")]
     static void BuildHotUpdate()
     {
@@ -119,36 +117,12 @@ public class AutoBuild
         //收集shader变体
         //CollectSVC();
 
-        var pkgversion = AddPackageVersion();
         //热更参数
         //热更包也可以使用zip
         //YooAssetsBuild(pkgversion, ECopyBuildinFileOption.None, null, true, new string[] { "config" });
-        YooAssetsBuild(pkgversion);
+        YooAssetsBuild(2024);
     }
 
-    private const string DefaultPackage = "DefaultPackage";
-    static int AddPackageVersion()
-    {
-        var buildInfo = AssetDatabase.LoadAssetAtPath<BuildInfo>
-           ("Assets/Editor/PackageBuildInfo.asset");
-        var version = ++buildInfo.PackageVersion;
-
-        EditorUtility.SetDirty(buildInfo);
-        AssetDatabase.SaveAssetIfDirty(buildInfo);
-
-        return version;
-    }
-    static int AddAppVersion()
-    {
-        var buildInfo = AssetDatabase.LoadAssetAtPath<BuildInfo>
-           ("Assets/Editor/PackageBuildInfo.asset");
-        var version = ++buildInfo.AppVersion;
-
-        EditorUtility.SetDirty(buildInfo);
-        AssetDatabase.SaveAssetIfDirty(buildInfo);
-
-        return version;
-    }
     /// <summary>
     /// 打包资源
     /// </summary>
@@ -209,7 +183,7 @@ public class AutoBuild
 
     public static void CollectSVC()
     {
-        string savePath = ShaderVariantCollectorSetting.GeFileSavePath(ResourceManager.assetPackage);
+        string savePath = ShaderVariantCollectorSetting.GeFileSavePath(GameEnter.Resource.assetPackageName);
         System.Action completedCallback = () =>
         {
             ShaderVariantCollection collection =
@@ -227,7 +201,7 @@ public class AutoBuild
             EditorTools.CloseUnityGameWindow();
             EditorApplication.Exit(0);
         };
-        ShaderVariantCollector.Run(savePath, ResourceManager.assetPackage, 1000, completedCallback);
+        ShaderVariantCollector.Run(savePath, GameEnter.Resource.assetPackageName, 1000, completedCallback);
     }
 
     const int spt = 3;

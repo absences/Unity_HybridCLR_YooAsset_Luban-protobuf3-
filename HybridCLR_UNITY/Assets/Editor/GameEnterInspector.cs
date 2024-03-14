@@ -33,7 +33,7 @@ public class GameEnterInspector : BaseEditorInspector
             {
                 gameSpeed = GetGameSpeed(selectedGameSpeed);
             }
-
+           
             if (gameSpeed != m_GameSpeed.floatValue)
             {
                 if (EditorApplication.isPlaying)
@@ -47,6 +47,8 @@ public class GameEnterInspector : BaseEditorInspector
             }
         }
         EditorGUILayout.EndVertical();
+
+        serializedObject.ApplyModifiedProperties();
     }
     private static readonly string[] GameSpeedForDisplay = new string[] { "0x", "0.01x", "0.1x", "0.25x", "0.5x", "1x", "1.5x", "2x", "4x", "8x" };
 

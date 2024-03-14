@@ -1,5 +1,20 @@
 using System.IO;
+using UnityEngine;
 using YooAsset;
+
+public sealed class DefaultDeliveryLoadServices : IDeliveryLoadServices
+{
+    public AssetBundle LoadAssetBundle(DeliveryFileInfo fileInfo)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public AssetBundleCreateRequest LoadAssetBundleAsync(DeliveryFileInfo fileInfo)
+    {
+        throw new System.NotImplementedException();
+    }
+}
+
 
 /// <summary>
 /// 希望将所有热更资源压缩到一个ZIP包里。玩家第一次启动游戏去下载ZIP包，下载完成后解压到沙盒目录下。

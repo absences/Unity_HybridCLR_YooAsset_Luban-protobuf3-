@@ -20,9 +20,14 @@ namespace GameInit
             await UniTask.Delay(1000);
 
             var resource = GameEnter.Resource;
-            var initializationOperation = resource.InitPackage();
-            await initializationOperation;
 
+            var initSuccess = await resource.InitPackage();
+            Log.Info("Init package "+ initSuccess);
+            await resource.InitTMPFontAsset();
+            Log.Info("init tmp success");
+            await GameEnter.UI.OpenUIFormAsync(nameof(UILoadForm), "Base");
+
+            TMPAssetLoader.Initialize(resource.ResourceManager);
 
             // 编辑器模式。
             if (resource.PlayMode == EPlayMode.EditorSimulateMode)
@@ -40,9 +45,9 @@ namespace GameInit
             else if (resource.PlayMode == EPlayMode.HostPlayMode)
             {
                 // 打开启动UI。
-                // UILoadMgr.Show(UIDefine.UILoadUpdate);
 
-                Log.Info("Updatable resource mode detected.");
+
+               Log.Info("Updatable resource mode detected.");
 
                 ChangeState<ProcedureUpdateVersion>(procedureOwner);
             }

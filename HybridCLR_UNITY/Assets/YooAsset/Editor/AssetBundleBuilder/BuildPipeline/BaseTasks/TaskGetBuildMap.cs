@@ -21,7 +21,7 @@ namespace YooAsset.Editor
             Dictionary<string, BuildAssetInfo> allBuildAssetInfos = new Dictionary<string, BuildAssetInfo>(1000);
 
             // 1. 获取所有收集器收集的资源
-            var collectResult = AssetBundleCollectorSettingData.Setting.GetPackageAssets(buildParameters, buildMode, packageName);
+            var collectResult = AssetBundleCollectorSettingData.Setting.GetPackageAssets(buildMode, packageName);
             List<CollectAssetInfo> allCollectAssets = collectResult.CollectAssets;
 
             // 2. 剔除未被引用的依赖项资源
@@ -138,11 +138,11 @@ namespace YooAsset.Editor
 
             // 10. 构建资源列表
             var allPackAssets = allBuildAssetInfos.Values.ToList();
-            //if (allPackAssets.Count == 0)
-            //{
-            //    string message = BuildLogger.GetErrorMessage(ErrorCode.PackAssetListIsEmpty, "The pack asset info is empty !");
-            //    throw new Exception(message);
-            //}
+            if (allPackAssets.Count == 0)
+            {
+                string message = BuildLogger.GetErrorMessage(ErrorCode.PackAssetListIsEmpty, "The pack asset info is empty !");
+                throw new Exception(message);
+            }
             foreach (var assetInfo in allPackAssets)
             {
                 context.PackAsset(assetInfo);

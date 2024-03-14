@@ -24,16 +24,16 @@ public class GameRemoteServices : IRemoteServices
         CodeVersion = Resource.AppVersion;
     }
 
-    public string GetRemoteFallbackURL(string fileName)
+    public string GetRemoteFallbackURL(string packageName, string fileName)
     {
-        return string.Format("{0}/{1}/{2}_{3}/{4}",
-         Resource.BackUpResourceSourceUrl, GameUtil.GetPlatformName(), VersionType, CodeVersion, fileName);
+        return string.Format("{0}/{1}/{2}_{3}/{4}/{5}",
+         Resource.BackUpResourceSourceUrl, GameUtil.GetPlatformName(), VersionType, CodeVersion, packageName, fileName);
     }
 
-    public string GetRemoteMainURL(string fileName)
+    public string GetRemoteMainURL(string packageName, string fileName)
     {
-        return string.Format("{0}/{1}/{2}_{3}/{4}",
-          Resource.ResourceSourceUrl, GameUtil.GetPlatformName(), VersionType, CodeVersion, fileName);
+        return string.Format("{0}/{1}/{2}_{3}/{4}/{5}",
+          Resource.ResourceSourceUrl, GameUtil.GetPlatformName(), VersionType, CodeVersion, packageName, fileName);
     }
 
 }

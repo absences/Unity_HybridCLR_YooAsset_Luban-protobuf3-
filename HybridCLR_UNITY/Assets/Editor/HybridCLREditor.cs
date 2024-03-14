@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HybridCLREditor 
 {
-    [MenuItem("Tools/CompileDll")]
+    [MenuItem("Tools/Compile Mono_AOT Dll")]
     public static void CompileDll()
     {
 
@@ -23,7 +23,7 @@ public class HybridCLREditor
     {
         var target = EditorUserBuildSettings.activeBuildTarget;
         string aotAssembliesSrcDir = SettingsUtil.GetAssembliesPostIl2CppStripDir(target);
-        string aotAssembliesDstDir = Application.dataPath + "/../Buildin/Codes";
+        string aotAssembliesDstDir = Application.dataPath + "/../Extra/Codes";
 
         foreach (var dll in SettingsUtil.AOTAssemblyNames)//patch aot 补充元数据文件
         {
@@ -42,7 +42,7 @@ public class HybridCLREditor
         var target = EditorUserBuildSettings.activeBuildTarget;
 
         string hotfixDllSrcDir = SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target);
-        string hotfixAssembliesDstDir = Application.dataPath + "/../Buildin/Codes";
+        string hotfixAssembliesDstDir = Application.dataPath + "/../Extra/Codes";
 
         foreach (var dll in SettingsUtil.HotUpdateAssemblyFilesExcludePreserved)
         {

@@ -46,9 +46,9 @@ namespace GameInit
            typeof(ProcedureDelivery),
            typeof(ProcedureUpdateManifest),
            typeof(ProcedureCreateDownloader),
-           typeof(ProcedureDownloadFile),
            typeof(ProcedureDownloadOver),
-           typeof(ProcedureClearCache),
+           typeof(PreDownLoadContent),
+           typeof(ProcedureUpdateEnd),
         };
 
         [SerializeField]

@@ -12,7 +12,8 @@ public class ConfigManager : IConfigManager
     Dictionary<Type, Dictionary<int, IMessage>> allTypesCfg;
     Dictionary<Type, IMessage> instanceCfg;//全局配置
 
-    public bool Loaded => throw new NotImplementedException();
+    //配置表数量
+    public int Count => allTypesCfg.Count + instanceCfg.Count;
 
     public ConfigManager()
     {
@@ -24,6 +25,11 @@ public class ConfigManager : IConfigManager
     {
         using var assetHandle = GameEnter.Resource.LoadRawFileAsync(parser.fileName);
         await assetHandle;
+        if (assetHandle.Status != EOperationStatus.Succeed)
+        {
+            Log.Error(assetHandle.LastError);
+            return;
+        }
         var list = parser.getDataList(parser.parseFrom(assetHandle.GetRawFileData()));
 
         if (parser.getIdFunc == null)

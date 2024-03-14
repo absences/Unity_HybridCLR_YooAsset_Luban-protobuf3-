@@ -20,7 +20,7 @@ namespace GameInit
             base.OnEnter(procedureOwner);
 
             _procedureOwner = procedureOwner;
-            Log.Info("start PackageVersion");
+            Log.Info("start update PackageVersion");
 
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
@@ -33,20 +33,35 @@ namespace GameInit
         }
         async UniTask GetStaticVersion()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             var resource = GameEnter.Resource;
 
-            var operation = resource.UpdatePackageVersionAsync();
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            
+            var operation = resource.UpdatePackageVersionAsync(GameEnter.Resource.rawfilePackageName);
 
-            await operation.ToUniTask();
+            await operation;
 
             if (operation.Status == EOperationStatus.Succeed)
             {
-                //线上最新版本operation.PackageVersion
-                resource.PackageVersion = operation.PackageVersion;
+                resource.rawfilePackage.packageVersion = operation.PackageVersion;
+               // Log.Info("rawfile newversion")
+                operation = resource.UpdatePackageVersionAsync(GameEnter.Resource.assetPackageName);
 
-                ChangeState<ProcedureDelivery>(_procedureOwner);
-                //ChangeState<ProcedureUpdateManifest>(_procedureOwner);
+                await operation;
+                if (operation.Status == EOperationStatus.Succeed)
+                {
+                    resource.assetPackage.packageVersion = operation.PackageVersion;
+
+                    ChangeState<ProcedureDelivery>(_procedureOwner);
+                }
+                else
+                {
+                    Log.Error(operation.Error);
+
+                    //UILoadTip.ShowMessageBox($"用户尝试更新静态版本失败！点击确认重试 \n \n <color=#FF0000>原因{operation.Error}</color>", MessageShowType.TwoButton,
+                    //   LoadStyle.StyleEnum.Style_Retry
+                    //    , () => { ChangeState<ProcedureUpdateVersion>(_procedureOwner); }, UnityEngine.Application.Quit);
+                }
             }
             else
             {

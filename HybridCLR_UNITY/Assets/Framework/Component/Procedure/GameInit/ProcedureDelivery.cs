@@ -16,39 +16,41 @@ namespace GameInit
             base.OnEnter(procedureOwner);
             _procedureManager = procedureOwner;
             var resource = GameEnter.Resource;
-            DownLoadFiles(resource.PackageName).Forget();
+          //  DownLoadFiles(resource.PackageName).Forget();
             //other package...
+
+            ChangeState<ProcedureUpdateManifest>(_procedureManager);
         }
-        async UniTask DownLoadFiles(string packageName)
-        {
-            var resource = GameEnter.Resource;
-            var fileName = resource.PackageVersion + "_deliveryFiles";
-            var sandBoxDeliveryPath = Path.Combine(resource.GetPackageSandboxRootDirectory(packageName), fileName);
+        //async UniTask DownLoadFiles(string packageName)
+        //{
+        //    var resource = GameEnter.Resource;
+        //    var fileName = resource.PackageVersion + "_deliveryFiles";
+        //    var sandBoxDeliveryPath = Path.Combine(resource.GetPackageSandboxRootDirectory(packageName), fileName);
 
-            var zipFile = fileName + ".zip";
+        //    var zipFile = fileName + ".zip";
 
-            if (!Directory.Exists(sandBoxDeliveryPath))
-            {
-                var url = GetMainResUrl(resource, zipFile);
-                UnityWebRequest request = UnityWebRequest.Get(url);
-                try
-                {
-                    await request.SendWebRequest();
+        //    if (!Directory.Exists(sandBoxDeliveryPath))
+        //    {
+        //        var url = GetMainResUrl(resource, zipFile);
+        //        UnityWebRequest request = UnityWebRequest.Get(url);
+        //        try
+        //        {
+        //            await request.SendWebRequest();
 
-                    if (request.result == UnityWebRequest.Result.Success)
-                    {
-                        UnZipDelivery(request.downloadHandler.data, sandBoxDeliveryPath);
-                    }
-                }
-                catch(Exception)
-                {
-                    Log.Info(request.url, request.error);
-                }
+        //            if (request.result == UnityWebRequest.Result.Success)
+        //            {
+        //                UnZipDelivery(request.downloadHandler.data, sandBoxDeliveryPath);
+        //            }
+        //        }
+        //        catch(Exception)
+        //        {
+        //            Log.Info(request.url, request.error);
+        //        }
                
-                ChangeState<ProcedureUpdateManifest>(_procedureManager);
-            }
-            await UniTask.CompletedTask;
-        }
+        //        ChangeState<ProcedureUpdateManifest>(_procedureManager);
+        //    }
+        //    await UniTask.CompletedTask;
+        //}
 
         string GetMainResUrl(ResourceComponent resource, string fileName)
         {

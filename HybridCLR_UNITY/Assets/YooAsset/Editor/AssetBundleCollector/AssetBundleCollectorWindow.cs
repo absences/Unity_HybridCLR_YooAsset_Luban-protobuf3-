@@ -40,7 +40,6 @@ namespace YooAsset.Editor
         private Toggle _locationToLowerToogle;
         private Toggle _includeAssetGUIDToogle;
         private Toggle _ignoreDefaultTypeToogle;
-        private TextField _extraCollectFolder;
         private Toggle _autoCollectShadersToogle;
 
         private VisualElement _packageContainer;
@@ -163,19 +162,6 @@ namespace YooAsset.Editor
                         RefreshWindow();
                     }
                 });
-
-                _extraCollectFolder = root.Q<TextField>("ExtraCollectFolders");
-                _extraCollectFolder.RegisterValueChangedCallback(evt =>
-                {
-                    var selectPackage = _packageListView.selectedItem as AssetBundleCollectorPackage;
-                    if (selectPackage != null)
-                    {
-                        selectPackage.ExtraCollectFolders = evt.newValue;
-                        AssetBundleCollectorSettingData.ModifyPackage(selectPackage);
-                        RefreshWindow();
-                    }
-                });
-
                 _autoCollectShadersToogle = root.Q<Toggle>("AutoCollectShaders");
                 _autoCollectShadersToogle.RegisterValueChangedCallback(evt =>
                 {
@@ -490,7 +476,6 @@ namespace YooAsset.Editor
                 _locationToLowerToogle.SetValueWithoutNotify(selectPackage.LocationToLower);
                 _includeAssetGUIDToogle.SetValueWithoutNotify(selectPackage.IncludeAssetGUID);
                 _ignoreDefaultTypeToogle.SetValueWithoutNotify(selectPackage.IgnoreDefaultType);
-                _extraCollectFolder.SetValueWithoutNotify(selectPackage.ExtraCollectFolders);
                 _autoCollectShadersToogle.SetValueWithoutNotify(selectPackage.AutoCollectShaders);
             }
             else
@@ -988,7 +973,7 @@ namespace YooAsset.Editor
                 Debug.LogWarning($"The collector is invalid : {collector.CollectPath} in group : {group.GroupName}");
                 return;
             }
-
+         
             if (collector.CollectorType == ECollectorType.MainAssetCollector || collector.CollectorType == ECollectorType.StaticAssetCollector)
             {
                 List<CollectAssetInfo> collectAssetInfos = null;

@@ -43,7 +43,7 @@ namespace YooAsset
         /// <summary>
         /// 身份是否无效
         /// </summary>
-        internal bool IsInvalid
+        public bool IsInvalid
         {
             get
             {

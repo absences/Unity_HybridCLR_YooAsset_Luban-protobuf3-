@@ -37,7 +37,7 @@ namespace YooAsset
         private long _cachedDownloadBytes = 0;
         private int _cachedDownloadCount = 0;
         private ESteps _steps = ESteps.None;
-        private float _currentSpeed = 0f;
+        private float _currentSpeed;
 
         /// <summary>
         /// 统计的下载文件总数量
@@ -64,9 +64,6 @@ namespace YooAsset
         {
             get { return _lastDownloadBytes; }
         }
-        /// <summary>
-        /// 当前下载器下载速度
-        /// </summary>
         public float CurrentSpeed
         {
             get { return _currentSpeed; }
@@ -155,13 +152,13 @@ namespace YooAsset
                     _cachedDownloadCount++;
                     _cachedDownloadBytes += downloader.GetDownloadFileSize();
                 }
-                _currentSpeed = downloadBytes / UnityEngine.Time.time;
+
                 // 移除已经完成的下载器（无论成功或失败）
                 foreach (var loader in _removeList)
                 {
                     _downloaders.Remove(loader);
                 }
-
+                _currentSpeed = downloadBytes / UnityEngine.Time.time;
                 // 如果下载进度发生变化
                 if (_lastDownloadBytes != downloadBytes || _lastDownloadCount != _cachedDownloadCount)
                 {
@@ -237,11 +234,11 @@ namespace YooAsset
         /// <param name="downloader">合并的下载器</param>
         public void Combine(DownloaderOperation downloader)
         {
-            if (_packageName != downloader._packageName)
-            {
-                YooLogger.Error("The downloaders have different resource packages !");
-                return;
-            }
+            //if (_packageName != downloader._packageName)
+            //{
+            //    YooLogger.Error("The downloaders have different resource packages !");
+            //    return;
+            //}
 
             if (Status != EOperationStatus.None)
             {

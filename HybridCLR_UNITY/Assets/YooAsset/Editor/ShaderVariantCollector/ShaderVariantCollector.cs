@@ -143,7 +143,7 @@ public static class ShaderVariantCollector
         List<string> allAssets = new List<string>(1000);
 
         // 获取所有打包的资源
-        CollectResult collectResult = AssetBundleCollectorSettingData.Setting.GetPackageAssets(null, EBuildMode.DryRunBuild, _packageName);
+        CollectResult collectResult = AssetBundleCollectorSettingData.Setting.GetPackageAssets(EBuildMode.DryRunBuild, _packageName);
         foreach (var assetInfo in collectResult.CollectAssets)
         {
             string[] depends = AssetDatabase.GetDependencies(assetInfo.AssetInfo.AssetPath, true);

@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using GameFramework;
 using HybridCLR;
 using System;
 using System.Collections;
@@ -27,21 +28,21 @@ public class HotFixComponent : BaseGameComponent
             using var handle = resource.LoadRawFileAsync(aotDllName);
             await handle.ToUniTask(this);
             LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(handle.GetRawFileData(), mode);
-            Log.Info(string.Format("LoadMetadata{0} {1}", aotDllName, err));
+            //Log.Info(string.Format("LoadMetadata{0} {1}", aotDllName, err));
         }
 
         {
             using var handle = resource.LoadRawFileAsync("MonoHot");//mono 
             await handle.ToUniTask(this);
             var assembly = Assembly.Load(handle.GetRawFileData());
-
+            s_Assemblies[0] = assembly;
             gameObject.AddComponent(assembly.GetType("MonoHotEnter"));
         }
         {
             using var handle = resource.LoadRawFileAsync("ildll");//hotfix main
             await handle.ToUniTask(this);
             Assembly assembly = Assembly.Load(handle.GetRawFileData());
-
+            s_Assemblies[1] = assembly;
 
             Type entryType = assembly.GetType("HotfixMain.HotFixActivity");
             MethodInfo method = entryType.GetMethod("Init");
@@ -64,6 +65,35 @@ public class HotFixComponent : BaseGameComponent
     }
     private Action<float, float> updateAction;
     private Action onDestroyAction;
+
+    private readonly Dictionary<string, Type> s_CachedTypes = new Dictionary<string, Type>(StringComparer.Ordinal);
+    private readonly Assembly[] s_Assemblies = new Assembly[2];
+
+    public Type GetType(string typeName)
+    {
+        if (string.IsNullOrEmpty(typeName))
+        {
+            throw new GameFrameworkException("Type name is invalid.");
+        }
+        if (!Inited)
+            return null;
+        if (s_CachedTypes.Count == 0)
+            foreach (var assembly in s_Assemblies)
+            {
+                foreach (var _type in assembly.GetTypes())
+                {
+                    s_CachedTypes.Add(_type.Name, _type);
+                }
+            }
+        foreach (var typePair in s_CachedTypes)
+        {
+            if (typePair.Key.EndsWith(typeName))
+            {
+                return typePair.Value;  
+            }
+        }
+        return null;
+    }
 
     private void Update()
     {

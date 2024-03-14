@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: chat
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 40072b05ae36ded48933b72d29587a15, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 4690a110e15bbe94d91a68cd73a14430, type: 3}
+  - {fileID: 21300000, guid: 2fdbc510f7a522041ba8a9258ff37a6e, type: 3}
+  - {fileID: 21300000, guid: e2cfbb4507a5c484bb68536bcd0ebf6e, type: 3}
+  - {fileID: 21300000, guid: 79bc4648e46eb5042bbe1ec7860be99f, type: 3}
+  - {fileID: 21300000, guid: 61ff8d3c76f84e94ca6a3fe3d1e53f15, type: 3}
+  - {fileID: 21300000, guid: ed92267d53c0eee4aaf16a87591d05b2, type: 3}
+  - {fileID: 21300000, guid: e3fdc04e9390b854fa9902b460a33ab3, type: 3}
+  - {fileID: 21300000, guid: 23998f9f812ede945810154b212bab63, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - chat_ico_emoji_10
+  - chat_ico_emoji_9
+  - chat_ico_emoji_3
+  - chat_ico_emoji_7
+  - chat_ico_emoji_8
+  - chat_ico_emoji_4
+  - chat_ico_emoji_6
+  - chat_ico_emoji_5
+  m_RenderDataMap: {}
+  m_Tag: chat
+  m_IsVariant: 0

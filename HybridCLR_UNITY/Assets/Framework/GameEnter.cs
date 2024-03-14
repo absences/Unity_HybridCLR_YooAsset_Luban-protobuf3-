@@ -1,4 +1,5 @@
 ﻿using GameFramework;
+using GameMain;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityGameFramework.Runtime;
@@ -8,6 +9,10 @@ public class GameEnter : MonoBehaviour
     private void Awake()
     {
         Utility.Text.SetTextHelper(new DefaultTextHelper());
+
+        GameFrameworkLog.SetLogHelper(new DinLogHelper());
+
+        DontDestroyOnLoad(gameObject);
     }
 
     #region GameSpeed
@@ -74,6 +79,12 @@ public class GameEnter : MonoBehaviour
             case HotFixComponent hotFixComponent:
                 HotFix = hotFixComponent;
                 break;
+            case ObjectPoolComponent objectPoolComponent:
+                ObjectPool = objectPoolComponent;
+                break;
+            case UIComponent uiComponent:
+                UI = uiComponent;
+                break;
         }
     }
 
@@ -87,5 +98,8 @@ public class GameEnter : MonoBehaviour
 
     public static HotFixComponent HotFix { private set; get; }
 
+    public static ObjectPoolComponent ObjectPool { private set; get; }
+
+    public static UIComponent UI { private set; get; }
     #endregion
 }

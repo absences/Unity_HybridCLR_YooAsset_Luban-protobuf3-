@@ -151,27 +151,42 @@ namespace YooAsset.Editor
 
             // 收集打包资源路径
             List<string> findAssets =new List<string>();
-          
             if (AssetDatabase.IsValidFolder(CollectPath))
             {
                 string collectDirectory = CollectPath;
                 string[] findResult = EditorTools.FindAssets(EAssetSearchType.All, collectDirectory);
                 findAssets.AddRange(findResult);
             }
-            else if (Directory.Exists(CollectPath))
-            {
-                string[] files = Directory.GetFiles(CollectPath, "*", SearchOption.AllDirectories);
-                foreach (var file in files)
-                {
-                    findAssets.Add(EditorTools.GetRegularPath(file));
-                }
-            }
             else
             {
                 string assetPath = CollectPath;
-                findAssets.Add(assetPath);
+
+                var extra = AssetDatabase.LoadAssetAtPath<ExtraCollectPath>(assetPath);
+
+                if (extra != null)
+                {
+                    if (!string.IsNullOrEmpty(extra.path))
+                    {
+                        if (Directory.Exists(extra.path))
+                        {
+                            string[] files = Directory.GetFiles(extra.path, "*", SearchOption.AllDirectories);
+                            foreach (var file in files)
+                            {
+                                findAssets.Add(EditorTools.GetRegularPath(file));
+                            }
+                        }
+                        else if (File.Exists(extra.path))
+                        {
+                            findAssets.Add(extra.path);
+                        }
+                    }
+                }
+                else
+                {
+                    findAssets.Add(assetPath);
+                }
             }
-         
+
             // 收集打包资源信息
             foreach (string assetPath in findAssets)
             {
@@ -301,6 +316,9 @@ namespace YooAsset.Editor
 
             // 获取其它资源打包规则结果
             IPackRule packRuleInstance = AssetBundleCollectorSettingData.GetPackRuleInstance(PackRuleName);
+
+
+
             PackRuleResult defaultPackRuleResult = packRuleInstance.GetPackRuleResult(new PackRuleData(assetInfo.AssetPath, CollectPath, group.GroupName, UserData));
             return defaultPackRuleResult.GetBundleName(command.PackageName, command.UniqueBundleName);
         }

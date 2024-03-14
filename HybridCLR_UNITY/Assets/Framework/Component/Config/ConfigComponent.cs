@@ -21,6 +21,17 @@ public class ConfigComponent : BaseGameComponent
 
     private IConfigManager m_ConfigManager = null;
 
+    public int Count
+    {
+        get
+        {
+            if (m_ConfigManager != null)
+            {
+               return m_ConfigManager.Count;
+            }
+            return 0;
+        }
+    }
 
     public async UniTask Init()
     {

@@ -158,4 +158,15 @@ namespace YooAsset.Editor
             return DefaultPackRule.CreateShadersPackRuleResult();
         }
     }
+    public class PackVideo : IPackRule
+    {
+        PackRuleResult IPackRule.GetPackRuleResult(PackRuleData data)
+        {
+            string bundleName = data.AssetPath;
+            string fileExtension = Path.GetExtension(data.AssetPath);
+            fileExtension = fileExtension.Remove(0, 1);
+            PackRuleResult result = new PackRuleResult(bundleName, fileExtension);
+            return result;
+        }
+    }
 }

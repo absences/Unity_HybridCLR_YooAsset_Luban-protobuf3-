@@ -20,15 +20,13 @@ public class FsmComponent : BaseGameComponent
     }
     public IFsmManager FsmManager
     {
-        get { return m_FsmManager; }
+        get { 
+            if (m_FsmManager == null)
+                m_FsmManager = new FsmManager();
+            return m_FsmManager;
+        }
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        m_FsmManager = new FsmManager();
-    }
     private void Update()
     {
         m_FsmManager.Update(Time.deltaTime, Time.realtimeSinceStartup);

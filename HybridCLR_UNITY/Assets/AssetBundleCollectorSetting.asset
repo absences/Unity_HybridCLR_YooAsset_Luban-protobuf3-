@@ -23,7 +23,6 @@ MonoBehaviour:
     IncludeAssetGUID: 0
     IgnoreDefaultType: 1
     AutoCollectShaders: 1
-    ExtraCollectFolders: 
     Groups:
     - GroupName: Default Group
       GroupDesc: 
@@ -46,17 +45,72 @@ MonoBehaviour:
         FilterRuleName: CollectShaderVariants
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/Buildin/tmp
+        CollectorGUID: 77c128cc95facd544ad09e6bf6da9bc6
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Buildin/materials
+        CollectorGUID: 242748b04578fa74a89828eae0746acb
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Buildin/prefab
+        CollectorGUID: 6c680c7d051b1be4e905861583d3e10c
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackSeparately
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Buildin/sprites/sprite
+        CollectorGUID: 4f858f4ceef586046acc6eee38d15d93
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
   - PackageName: rawfilePackage
     PackageDesc: 
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
-    AutoCollectShaders: 1
-    ExtraCollectFolders: Buildin
+    IgnoreDefaultType: 0
+    AutoCollectShaders: 0
     Groups:
     - GroupName: Default Group
       GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
-      Collectors: []
+      Collectors:
+      - CollectPath: Assets/Editor/collectConfig/extra_Codes.asset
+        CollectorGUID: 269194fb823e85545bdd99a13b957e64
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Editor/collectConfig/extra_Config.asset
+        CollectorGUID: fc70fda7131430441b388ba6910bd6f5
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Editor/collectConfig/extra_Video.asset
+        CollectorGUID: d10cfb44dbf1d6e45b7ea934ecd6ddb9
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackVideo
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 

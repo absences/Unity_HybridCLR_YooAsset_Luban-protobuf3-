@@ -48,8 +48,8 @@ namespace YooAsset
         // 下载相关
         private BundleInfo ConvertToDownloadInfo(PackageBundle packageBundle)
         {
-            string remoteMainURL = _remoteServices.GetRemoteMainURL(packageBundle.FileName);
-            string remoteFallbackURL = _remoteServices.GetRemoteFallbackURL(packageBundle.FileName);
+            string remoteMainURL = _remoteServices.GetRemoteMainURL(packageBundle.PackageName, packageBundle.FileName);
+            string remoteFallbackURL = _remoteServices.GetRemoteFallbackURL(packageBundle.PackageName, packageBundle.FileName);
             BundleInfo bundleInfo = new BundleInfo(_assist, packageBundle, BundleInfo.ELoadMode.LoadFromRemote, remoteMainURL, remoteFallbackURL);
             return bundleInfo;
         }
@@ -106,6 +106,12 @@ namespace YooAsset
         UpdatePackageVersionOperation IPlayMode.UpdatePackageVersionAsync(bool appendTimeTicks, int timeout)
         {
             var operation = new WebPlayModeUpdatePackageVersionOperation(this, appendTimeTicks, timeout);
+            OperationSystem.StartOperation(PackageName, operation);
+            return operation;
+        }
+        UpdatePrePackageVersionOperation IPlayMode.UpdatePrePackageVersionAsync(bool appendTimeTicks, int timeout)
+        {
+            var operation = new WebPlayModeUpdatePrePackageVersionOperation(this, appendTimeTicks, timeout);
             OperationSystem.StartOperation(PackageName, operation);
             return operation;
         }

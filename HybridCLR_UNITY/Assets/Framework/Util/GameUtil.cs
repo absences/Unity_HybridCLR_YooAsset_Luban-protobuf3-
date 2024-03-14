@@ -15,12 +15,12 @@ public static class GameUtil
     /// <returns></returns>
     public static int ConvertDatetimeToInt(DateTime now)
     {
-        DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        DateTime startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
         return (int)(now - startTime).TotalSeconds;
     }
     public static long ConvertDatetimeToLong(DateTime now)
     {
-        DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        DateTime startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
         return (int)(now - startTime).TotalMilliseconds;
     }
     public static bool CatchAnyParamNil(params object[] param)
@@ -126,29 +126,6 @@ public static class GameUtil
                     Application.platform.ToString()));
         }
 #endif
-    }
-
-    /// <summary>
-    /// 获取或增加组件。
-    /// </summary>
-    /// <typeparam name="T">要获取或增加的组件。</typeparam>
-    /// <param name="gameObject">目标对象。</param>
-    /// <returns>获取或增加的组件。</returns>
-    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
-    {
-        T component = gameObject.GetComponent<T>();
-        if (component == null)
-        {
-            component = gameObject.AddComponent<T>();
-        }
-
-        return component;
-    }
-    public static bool GetComponent<T>(this GameObject gameObject, ref T component) where T : Component
-    {
-        if (component == null)
-            component = gameObject.GetComponent<T>();
-        return component != null;
     }
 
     public static string LogObj(object obj)
