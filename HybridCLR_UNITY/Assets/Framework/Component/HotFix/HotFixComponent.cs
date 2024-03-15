@@ -27,34 +27,41 @@ public class HotFixComponent : BaseGameComponent
         {
             using var handle = resource.LoadRawFileAsync(aotDllName);
             await handle.ToUniTask(this);
-            LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(handle.GetRawFileData(), mode);
+            if (handle.Status == YooAsset.EOperationStatus.Succeed)
+                RuntimeApi.LoadMetadataForAOTAssembly(handle.GetRawFileData(), mode);
             //Log.Info(string.Format("LoadMetadata{0} {1}", aotDllName, err));
         }
 
         {
             using var handle = resource.LoadRawFileAsync("MonoHot");//mono 
             await handle.ToUniTask(this);
-            var assembly = Assembly.Load(handle.GetRawFileData());
-            s_Assemblies[0] = assembly;
-            gameObject.AddComponent(assembly.GetType("MonoHotEnter"));
+            if(handle.Status== YooAsset.EOperationStatus.Succeed)
+            {
+                var assembly = Assembly.Load(handle.GetRawFileData());
+                s_Assemblies[0] = assembly;
+                gameObject.AddComponent(assembly.GetType("MonoHotEnter"));
+            }
         }
         {
             using var handle = resource.LoadRawFileAsync("ildll");//hotfix main
             await handle.ToUniTask(this);
-            Assembly assembly = Assembly.Load(handle.GetRawFileData());
-            s_Assemblies[1] = assembly;
+            if (handle.Status == YooAsset.EOperationStatus.Succeed)
+            {
+                Assembly assembly = Assembly.Load(handle.GetRawFileData());
+                s_Assemblies[1] = assembly;
 
-            Type entryType = assembly.GetType("HotfixMain.HotFixActivity");
-            MethodInfo method = entryType.GetMethod("Init");
-            method.Invoke(null, null);//
+                Type entryType = assembly.GetType("HotfixMain.HotFixActivity");
+                MethodInfo method = entryType.GetMethod("Init");
+                method.Invoke(null, null);//
 
-            var updatemethod = entryType.GetMethod("Update");
-            updateAction = Delegate.CreateDelegate(typeof(Action<float, float>), null, updatemethod) as Action<float, float>;
+                var updatemethod = entryType.GetMethod("Update");
+                updateAction = Delegate.CreateDelegate(typeof(Action<float, float>), null, updatemethod) as Action<float, float>;
 
 
-            var onDestroy = entryType.GetMethod("ShutDown");
-            onDestroyAction = Delegate.CreateDelegate(typeof(Action), null, onDestroy) as Action;
-
+                var onDestroy = entryType.GetMethod("ShutDown");
+                onDestroyAction = Delegate.CreateDelegate(typeof(Action), null, onDestroy) as Action;
+            }
+                
             //Type netparseentryType = assembly.GetType("HotfixMain.ILNetHelper");
             //var netparse = netparseentryType.GetMethod("HandleMsg");
 
