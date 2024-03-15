@@ -195,7 +195,7 @@ namespace GameInit
             res.assetPackage.package.ForceUnloadAllAssets();
             res.rawfilePackage.package.ForceUnloadAllAssets();
 
-            await res.InitTMPFontAsset();
+            await res.InitGameAsset();
 
             //app版本水印改变后会删除manifest文件夹
 

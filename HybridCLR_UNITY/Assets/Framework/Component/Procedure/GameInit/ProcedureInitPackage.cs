@@ -23,7 +23,7 @@ namespace GameInit
 
             var initSuccess = await resource.InitPackage();
             Log.Info("Init package "+ initSuccess);
-            await resource.InitTMPFontAsset();
+            await resource.InitGameAsset();
             Log.Info("init tmp success");
             await GameEnter.UI.OpenUIFormAsync(nameof(UILoadForm), "Base");
 

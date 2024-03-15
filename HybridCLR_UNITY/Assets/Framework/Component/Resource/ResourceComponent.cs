@@ -88,13 +88,22 @@ public class ResourceComponent : BaseGameComponent
         };
         return resourceInited;
     }
-    public async UniTask InitTMPFontAsset()
+    public async UniTask InitGameAsset()
     {
         AssetHandle handle = LoadAssetAsync<TMP_FontAsset>(TMPAssetLoader.Tmp_Font_Asset);
         await handle;
         MaterialReferenceManager.instance.Clear();
 
         TMP_Settings.defaultFontAsset = handle.GetAssetObject<TMP_FontAsset>();
+
+        handle = LoadAssetAsync<ShaderVariantCollection>("sv");
+
+        await handle;
+
+        var asset = handle.GetAssetObject<ShaderVariantCollection>();
+
+        asset.WarmUp();
+
     }
 
     public AssetHandle LoadAssetAsync<T>(string location, uint priority = 0) where T : Object
