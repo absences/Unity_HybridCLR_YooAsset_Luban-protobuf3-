@@ -29,6 +29,8 @@ public class HotFixComponent : BaseGameComponent
             await handle.ToUniTask(this);
             if (handle.Status == YooAsset.EOperationStatus.Succeed)
                 RuntimeApi.LoadMetadataForAOTAssembly(handle.GetRawFileData(), mode);
+            else
+                Log.Warning(handle.LastError);
             //Log.Info(string.Format("LoadMetadata{0} {1}", aotDllName, err));
         }
 
@@ -41,6 +43,8 @@ public class HotFixComponent : BaseGameComponent
                 s_Assemblies[0] = assembly;
                 gameObject.AddComponent(assembly.GetType("MonoHotEnter"));
             }
+            else
+                Log.Warning(handle.LastError);
         }
         {
             using var handle = resource.LoadRawFileAsync("ildll");//hotfix main
@@ -61,7 +65,9 @@ public class HotFixComponent : BaseGameComponent
                 var onDestroy = entryType.GetMethod("ShutDown");
                 onDestroyAction = Delegate.CreateDelegate(typeof(Action), null, onDestroy) as Action;
             }
-                
+            else
+                Log.Warning(handle.LastError);
+
             //Type netparseentryType = assembly.GetType("HotfixMain.ILNetHelper");
             //var netparse = netparseentryType.GetMethod("HandleMsg");
 
@@ -106,7 +112,7 @@ public class HotFixComponent : BaseGameComponent
     {
         if (Inited)
         {
-            updateAction.Invoke(Time.deltaTime, Time.realtimeSinceStartup);
+            updateAction?.Invoke(Time.deltaTime, Time.realtimeSinceStartup);
         }
     }
 
@@ -114,7 +120,7 @@ public class HotFixComponent : BaseGameComponent
     {
         if (Inited)
         {
-            onDestroyAction();
+            onDestroyAction?.Invoke();
         }
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace YooAsset
@@ -21,7 +21,7 @@ namespace YooAsset
         private int _requestCount = 0;
 
         /// <summary>
-        /// °ü¹ü°æ±¾
+        /// åŒ…è£¹ç‰ˆæœ¬
         /// </summary>
         public string PrePackageVersion { private set; get; }
 
@@ -90,13 +90,13 @@ namespace YooAsset
         {
             string url;
 
-            // ÂÖÁ÷·µ»ØÇëÇóµØÖ·
+            // è½®æµè¿”å›è¯·æ±‚åœ°å€
             if (_requestCount % 2 == 0)
                 url = _remoteServices.GetRemoteMainURL(packageName, fileName);
             else
                 url = _remoteServices.GetRemoteFallbackURL(packageName, fileName);
 
-            // ÔÚURLÄ©Î²Ìí¼ÓÊ±¼ä´Á
+            // åœ¨URLæœ«å°¾æ·»åŠ æ—¶é—´æˆ³
             if (_appendTimeTicks)
                 return $"{url}?{System.DateTime.UtcNow.Ticks}";
             else

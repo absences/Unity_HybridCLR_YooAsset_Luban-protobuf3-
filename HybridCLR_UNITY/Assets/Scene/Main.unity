@@ -489,12 +489,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8162a0dee48949f478692d9ed57a904e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayMode: 2
+  PlayMode: 0
   Milliseconds: 30
   rawfilePackage:
     packageVersion: 
+    prepackageVersion: 
   assetPackage:
     packageVersion: 
+    prepackageVersion: 
   rawfilePackageName: rawfilePackage
   assetPackageName: assetPackage
   AppVersion: 1
