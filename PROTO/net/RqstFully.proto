@@ -1,0 +1,105 @@
+syntax="proto3";
+option csharp_namespace = "pbnet";
+
+import "Common.proto";
+enum MessageID
+{
+    MGS_NONE=0;
+    MSG_DISCONNECT_NOTIFY = 1000;   // 下线通知
+    MSG_LOGIN_REQUEST = 1001 ;      // 登录请求
+    MSG_LOGIN_REPLY = 1002;        // 登录响应
+}
+//测试1
+message ReqRegInfo {//1
+  // 昵称
+  string name=1;
+ //成年
+  bool adult=2;
+  // 年龄
+  sint32 year=3;
+
+  sint32 roleID=4;
+}
+
+message C2G_PlayerPing{//2
+  sint32 localId=1;
+  sint64 sendTimestamp=2;
+}
+
+message Msg_HashCode{//4
+  sint32 StartTick=1;
+  repeated sint32 HashCodes=2;
+}
+
+// [进度百分比 1表示1% 100表示已经加载完成]
+message C2G_LoadingProgress{//5
+  sint32 Progress=1;
+}
+message C2G_ReqMissFrame{//6
+
+  sint32 StartTick=1;
+}
+message C2G_RepMissFrameAck{//7
+
+  sint32 MissFrameTick=1;
+}
+message Msg_PlayerInput{//8
+  PlayerInput Input=1;
+}
+//CreateRoom
+message C2G_JoinRoom{//9
+
+}
+
+
+// //测试2
+// message LoginInfo {  //2
+// // 账户名
+// string account=1;
+// // 密码
+// string psw=2;
+// }
+// //测试3
+// message ChangeUserInfo {  //3
+// // 要更改的名称
+//     string userName=1;
+//      //成年
+//     bool adult=2;
+//     // 年龄
+//     sint32 year=3;
+//     //头像类型
+//     sint32 icontype=4;
+//     //头像配置
+//     sint32 iconcfgID=5;
+//     //图片地址
+//     string iconurl=6;
+// }
+// //测试4
+// message UpLoadInfo {//4
+//     sint32 type=1;//1头像
+
+//     bytes data=2;
+
+//     string name=3;
+// }
+
+// //测试7
+// message RqstApproveApplyJoinHunt {  //7
+// // 是否同意
+//  bool agree=1;
+// // 申请的角色id
+//  string rid=2;
+// // 角色服务器id
+//  sint32 sid=3;
+// }
+// //测试8
+// message RqstBarracksSpeedUp {  //8
+// // 建筑唯一序号
+//  sint32 buildingRix=1;
+// // 加速道具id
+//  sint32 itemId=2;
+// // 加速道具使用数量
+//  sint32 count=3;
+// // 购买并使用
+//  bool buyAndUse=4;
+// }

@@ -4,7 +4,7 @@ function DEFINE()
     VS_PATH="/c/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/devenv.exe"
     CMAKE="/c/Program Files/CMake/bin/cmake.exe"
     WORKSPACE=$(cd $(dirname $0);pwd)
-    protobuf="protobuf-25.3"
+    protobuf="protobuf-26.0"
     PbFor="csharp_cfg"
     dirName=".temp"
     PROTOBUILD="$dirName/Build/Release/protoc.exe"

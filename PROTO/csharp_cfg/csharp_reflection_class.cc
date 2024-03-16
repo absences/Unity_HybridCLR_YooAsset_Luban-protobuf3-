@@ -52,9 +52,9 @@ namespace google
           WriteIntroduction(printer);
 
           // WriteDescriptor(printer);
-          //  Close the class declaration.
+          // Close the class declaration.
           // printer->Outdent();
-          // printer->Print("}\n");
+          //  printer->Print("}\n");
 
           if (file_->extension_count() > 0)
           {
@@ -138,12 +138,12 @@ namespace google
           }
 
           // printer->Print(
-          //   "/// <summary>Holder for reflection information generated from $file_name$</summary>\n"
-          //   "$access_level$ static partial class $reflection_class_name$ {\n"
-          //   "\n",
-          //   "file_name", file_->name(),
-          //   "access_level", class_access_level(),
-          //   "reflection_class_name", reflectionClassname_);
+          //     "/// <summary>Holder for reflection information generated from $file_name$</summary>\n"
+          //     "$access_level$ static partial class $reflection_class_name$ {\n"
+          //     "\n",
+          //     "file_name", file_->name(),
+          //     "access_level", class_access_level(),
+          //     "reflection_class_name", reflectionClassname_);
           // printer->Indent();
         }
 

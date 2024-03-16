@@ -1,0 +1,32 @@
+syntax = "proto3";
+// net公共结构
+option csharp_namespace = "pbnet";
+
+// vector
+message PVector{
+ sint32 X=1;
+ sint32 Y=2;
+}
+//玩家输入
+message FInput{
+
+    PVector input=1;
+    //技能在自身技能表里的索引
+    sint32 skillIdx=2;
+    //播放角色动画
+    sint32 actionIdx=3;
+}
+
+
+message PlayerInput{
+
+    repeated bytes Commands=1;
+    //玩家无效输入
+    bool IsMiss=2;
+  
+    sint32 ActorId=3;
+    sint32 Tick=4;
+  
+    float  timeSinceStartUp=5;
+  
+}

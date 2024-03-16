@@ -1,0 +1,60 @@
+syntax="proto3";
+option csharp_namespace = "pbnet";
+
+import "Common.proto";
+//玩家信息
+message RespPlayerInfo { 
+  // id
+  sint32 actorID=1;
+
+  sint32 roleID=2;
+  // 昵称
+  string name=3;
+}
+message Msg_G2C_PlayerPing{//2
+
+  sint32 localId=1;
+  sint64 sendTimestamp=2;
+  sint64 timeSinceServerStart=3;
+}
+
+message ServerFrame{
+  sint32 tick=1;
+  map<sint32,PlayerInput>  Inputs=2;
+}
+message MutilFrames{
+  sint32 startTick =1;
+
+  repeated ServerFrame frames=2;
+}
+message Msg_ServerFrames{//4
+  MutilFrames Frames =1;
+}
+//加入
+message Msg_G2C_JoinSuccess{//5
+  RespPlayerInfo info=1;
+}
+message Msg_G2C_GameStartInfo{//6
+  sint32 UserCount=1;
+  sint32 GameSeed=2;
+  repeated RespPlayerInfo infos=3;
+}
+message Msg_G2C_LoadingProgress{//7
+
+  repeated sint32 Progress=1;
+}
+//客户端加载完毕
+message Msg_G2C_AllFinishedLoaded{//8
+
+}
+message Msg_RepMissFrame {//9
+  sint32 startTick =1;
+
+  repeated ServerFrame frames=2;
+}
+message G2C_LoginSuccess{//10
+
+  RespPlayerInfo info=1;
+}
+
+//-----------------
