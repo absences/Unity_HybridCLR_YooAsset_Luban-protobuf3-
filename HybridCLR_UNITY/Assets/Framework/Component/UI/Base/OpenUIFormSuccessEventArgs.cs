@@ -1,16 +1,9 @@
-﻿
-
-
-
-
-
-
-namespace GameFramework.UI
+﻿namespace GameFramework.UI
 {
     /// <summary>
     /// 打开界面成功事件。
     /// </summary>
-    public sealed class OpenUIFormSuccessEventArgs : GameFrameworkEventArgs
+    internal sealed class OpenUIFormSuccessEventArgs : GameFrameworkEventArgs
     {
         /// <summary>
         /// 初始化打开界面成功事件的新实例。

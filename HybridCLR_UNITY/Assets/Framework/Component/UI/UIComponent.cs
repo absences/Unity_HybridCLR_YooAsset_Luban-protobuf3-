@@ -129,11 +129,11 @@ public partial class UIComponent : BaseGameComponent
             m_UIManager.OpenUIFormUpdate += OnOpenUIFormUpdate;
         }
 
-
         if (m_EnableCloseUIFormCompleteEvent)
         {
             m_UIManager.CloseUIFormComplete += OnCloseUIFormComplete;
         }
+
         //对象池管理器
         m_UIManager.SetObjectPoolManager(GameEnter.ObjectPool.ObjectPoolManager);
         m_UIManager.InstanceAutoReleaseInterval = m_InstanceAutoReleaseInterval;
@@ -670,6 +670,5 @@ public partial class UIComponent : BaseGameComponent
     {
         m_EventComponent.Fire(this, UnityGameFramework.Runtime.CloseUIFormCompleteEventArgs.Create(e));
     }
-
 
 }

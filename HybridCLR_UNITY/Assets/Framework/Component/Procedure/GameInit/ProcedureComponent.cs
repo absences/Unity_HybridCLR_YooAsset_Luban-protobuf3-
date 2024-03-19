@@ -26,12 +26,6 @@ namespace GameInit
             }
         }
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            m_ProcedureManager = new ProcedureManager();
-        }
 
         // private string[] m_AvailableProcedureTypeNames = null;
         public Type[] procedureTypes = new Type[]
@@ -56,8 +50,13 @@ namespace GameInit
 
         private ProcedureBase m_EntranceProcedure = null;
 
-        void Start()
+        public void Init()
         {
+            if (m_ProcedureManager != null)
+                return;
+
+            m_ProcedureManager = new ProcedureManager();
+
             ProcedureBase[] procedures = new ProcedureBase[procedureTypes.Length];
             for (int i = 0; i < procedureTypes.Length; i++)
             {

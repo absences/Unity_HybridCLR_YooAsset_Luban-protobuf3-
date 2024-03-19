@@ -19,6 +19,6 @@ dotnet %LUBAN_DLL% ^
 
 xcopy pb_proto\Schema.cs ..\..\HybridCLR_UNITY\Assets\Generated\Config /y
 
-xcopy "pb_bin\*.bytes" "..\..\HybridCLR_UNITY\Buildin\Config" /s /e /y
+xcopy "pb_bin\*.bytes" "..\..\HybridCLR_UNITY\Extra\Config" /s /e /y
 
 pause

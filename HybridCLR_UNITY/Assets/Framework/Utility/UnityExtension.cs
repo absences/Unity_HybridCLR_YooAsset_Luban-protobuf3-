@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +17,10 @@ public static class UnityExtension
         return component;
     }
     /// <summary>
-    /// µİ¹éÉèÖÃÓÎÏ·¶ÔÏóµÄ²ã´Î¡£
+    /// é€’å½’è®¾ç½®æ¸¸æˆå¯¹è±¡çš„å±‚æ¬¡ã€‚
     /// </summary>
-    /// <param name="gameObject"><see cref="GameObject" /> ¶ÔÏó¡£</param>
-    /// <param name="layer">Ä¿±ê²ã´ÎµÄ±àºÅ¡£</param>
+    /// <param name="gameObject"><see cref="GameObject" /> å¯¹è±¡ã€‚</param>
+    /// <param name="layer">ç›®æ ‡å±‚æ¬¡çš„ç¼–å·ã€‚</param>
     public static void SetLayerRecursively(this GameObject gameObject, int layer)
     {
         gameObject.GetComponentsInChildren(true, s_CachedTransforms);

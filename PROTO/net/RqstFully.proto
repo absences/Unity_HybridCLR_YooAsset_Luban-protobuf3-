@@ -51,6 +51,10 @@ message C2G_JoinRoom{//9
 
 }
 
+message C2G_HeartNeat{//10
+
+}
+
 
 // //测试2
 // message LoginInfo {  //2

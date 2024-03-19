@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2020 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
-
+﻿
 using GameFramework;
 using GameFramework.Event;
 using GameFramework.UI;
@@ -14,7 +8,7 @@ namespace UnityGameFramework.Runtime
     /// <summary>
     /// 关闭界面完成事件。
     /// </summary>
-    public sealed class CloseUIFormCompleteEventArgs : GameEventArgs
+    public sealed class CloseUIFormCompleteEventArgs : BaseEventArgs
     {
         /// <summary>
         /// 关闭界面完成事件编号。

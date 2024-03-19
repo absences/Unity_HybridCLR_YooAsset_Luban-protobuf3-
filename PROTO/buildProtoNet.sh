@@ -49,7 +49,7 @@ function GenNetProto()
         "$PROTOBUILD"  --proto_path=./net --csharp_out=./net "$file"
 
         cp "$name.cs" "../HybridCLR_UNITY/Assets/Generated/netGen"
-      #  mv "$name.cs" "../Server/Server/Gen/"
+        mv "$name.cs" "../Server/Server/Gen/"
     done
 
     #拷贝文件夹下所有文件到目标目录下

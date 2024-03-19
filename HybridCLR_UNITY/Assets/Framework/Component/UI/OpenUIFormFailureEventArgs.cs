@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2020 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
-
+﻿
 using GameFramework;
 using GameFramework.Event;
 
@@ -13,7 +7,7 @@ namespace UnityGameFramework.Runtime
     /// <summary>
     /// 打开界面失败事件。
     /// </summary>
-    public sealed class OpenUIFormFailureEventArgs : GameEventArgs
+    public sealed class OpenUIFormFailureEventArgs : BaseEventArgs
     {
         /// <summary>
         /// 打开界面失败事件编号。
@@ -103,7 +97,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         /// <param name="e">内部事件。</param>
         /// <returns>创建的打开界面失败事件。</returns>
-        public static OpenUIFormFailureEventArgs Create(GameFramework.UI.OpenUIFormFailureEventArgs e)
+        internal static OpenUIFormFailureEventArgs Create(GameFramework.UI.OpenUIFormFailureEventArgs e)
         {
             OpenUIFormFailureEventArgs openUIFormFailureEventArgs = ReferencePool.Acquire<OpenUIFormFailureEventArgs>();
             openUIFormFailureEventArgs.SerialId = e.SerialId;

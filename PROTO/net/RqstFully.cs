@@ -1002,6 +1002,86 @@ namespace pbnet {
     }
   }
 
+  /// <summary>
+  ///10
+  /// </summary>
+  public sealed partial class C2G_HeartNeat : pb::IMessage<C2G_HeartNeat>
+  {
+    private static readonly pb::MessageParser<C2G_HeartNeat> _parser = new pb::MessageParser<C2G_HeartNeat>(() => new C2G_HeartNeat());
+    private pb::UnknownFieldSet _unknownFields;
+    public static pb::MessageParser<C2G_HeartNeat> Parser { get { return _parser; } }
+
+    /// <summary>协议ID </summary>
+    public const int ID = 10;
+    public C2G_HeartNeat() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    public C2G_HeartNeat(C2G_HeartNeat other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    public C2G_HeartNeat Clone() {
+      return new C2G_HeartNeat(this);
+    }
+
+    public override bool Equals(object other) {
+      return Equals(other as C2G_HeartNeat);
+    }
+
+    public bool Equals(C2G_HeartNeat other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    public void MergeFrom(C2G_HeartNeat other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+  }
+
   #endregion
 
 }

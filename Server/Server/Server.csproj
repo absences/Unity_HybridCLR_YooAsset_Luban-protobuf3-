@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73122C7B-A6F0-42FA-92E2-471E0020F489}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GameServer</RootNamespace>
+    <AssemblyName>GameServer</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>GameServer.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>.\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gen\Common.cs" />
+    <Compile Include="Gen\RespFullyLst.cs" />
+    <Compile Include="Gen\RqstFully.cs" />
+    <Compile Include="Google.Protobuf\ByteArray.cs" />
+    <Compile Include="Google.Protobuf\ByteString.cs" />
+    <Compile Include="Google.Protobuf\CodedInputStream.cs" />
+    <Compile Include="Google.Protobuf\CodedOutputStream.ComputeSize.cs" />
+    <Compile Include="Google.Protobuf\CodedOutputStream.cs" />
+    <Compile Include="Google.Protobuf\Collections\Lists.cs" />
+    <Compile Include="Google.Protobuf\Collections\MapField.cs" />
+    <Compile Include="Google.Protobuf\Collections\ProtobufEqualityComparers.cs" />
+    <Compile Include="Google.Protobuf\Collections\RepeatedField.cs" />
+    <Compile Include="Google.Protobuf\ExtensionValue.cs" />
+    <Compile Include="Google.Protobuf\FieldCodec.cs" />
+    <Compile Include="Google.Protobuf\IDeepCloneable.cs" />
+    <Compile Include="Google.Protobuf\IMessage.cs" />
+    <Compile Include="Google.Protobuf\InvalidProtocolBufferException.cs" />
+    <Compile Include="Google.Protobuf\LimitedInputStream.cs" />
+    <Compile Include="Google.Protobuf\MessageExtensions.cs" />
+    <Compile Include="Google.Protobuf\MessageParser.cs" />
+    <Compile Include="Google.Protobuf\ObjectIntPair.cs" />
+    <Compile Include="Google.Protobuf\ParseContext.cs" />
+    <Compile Include="Google.Protobuf\ParserInternalState.cs" />
+    <Compile Include="Google.Protobuf\ParsingPrimitives.cs" />
+    <Compile Include="Google.Protobuf\ParsingPrimitivesMessages.cs" />
+    <Compile Include="Google.Protobuf\ProtoPreconditions.cs" />
+    <Compile Include="Google.Protobuf\SegmentedBufferHelper.cs" />
+    <Compile Include="Google.Protobuf\UnknownField.cs" />
+    <Compile Include="Google.Protobuf\UnknownFieldSet.cs" />
+    <Compile Include="Google.Protobuf\WireFormat.cs" />
+    <Compile Include="Google.Protobuf\WriteBufferHelper.cs" />
+    <Compile Include="Google.Protobuf\WriteContext.cs" />
+    <Compile Include="Google.Protobuf\WriterInternalState.cs" />
+    <Compile Include="Google.Protobuf\WritingPrimitives.cs" />
+    <Compile Include="Google.Protobuf\WritingPrimitivesMessages.cs" />
+    <Compile Include="LockStepEngine\BaseType\LAxis2D.cs" />
+    <Compile Include="LockStepEngine\BaseType\LAxis3D.cs" />
+    <Compile Include="LockStepEngine\BaseType\LFloat.cs" />
+    <Compile Include="LockStepEngine\BaseType\LMatrix33.cs" />
+    <Compile Include="LockStepEngine\BaseType\LQuaternion.cs" />
+    <Compile Include="LockStepEngine\BaseType\LRect.cs" />
+    <Compile Include="LockStepEngine\BaseType\LVector2.cs" />
+    <Compile Include="LockStepEngine\BaseType\LVector2Int.cs" />
+    <Compile Include="LockStepEngine\BaseType\LVector3.cs" />
+    <Compile Include="LockStepEngine\BaseType\LVector3Int.cs" />
+    <Compile Include="LockStepEngine\LMath.cs" />
+    <Compile Include="LockStepEngine\LUT\LUTAcos.cs" />
+    <Compile Include="LockStepEngine\LUT\LUTAsin.cs" />
+    <Compile Include="LockStepEngine\LUT\LUTAtan2.cs" />
+    <Compile Include="LockStepEngine\LUT\LUTSinCos.cs" />
+    <Compile Include="Manager\ClientController.cs" />
+    <Compile Include="Manager\ControllerManager.cs" />
+    <Compile Include="Manager\RoomController.cs" />
+    <Compile Include="Model\BaseController.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\ConnHelper.cs" />
+    <Compile Include="Model\HashCodeMatcher.cs" />
+    <Compile Include="Manager\LoginController.cs" />
+    <Compile Include="Model\GameRoom.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Manager\RunServer.cs" />
+    <Compile Include="Telepathy\Common.cs" />
+    <Compile Include="Telepathy\ConnectionState.cs" />
+    <Compile Include="Telepathy\EventType.cs" />
+    <Compile Include="Telepathy\Log.cs" />
+    <Compile Include="Telepathy\MagnificentReceivePipe.cs" />
+    <Compile Include="Telepathy\MagnificentSendPipe.cs" />
+    <Compile Include="Telepathy\NetworkStreamExtensions.cs" />
+    <Compile Include="Telepathy\Pool.cs" />
+    <Compile Include="Telepathy\Server.cs" />
+    <Compile Include="Telepathy\ThreadFunctions.cs" />
+    <Compile Include="Telepathy\Utils.cs" />
+    <Compile Include="LockStepEngine\LTime.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

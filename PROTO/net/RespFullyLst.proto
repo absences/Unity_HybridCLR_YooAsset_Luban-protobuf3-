@@ -2,6 +2,18 @@ syntax="proto3";
 option csharp_namespace = "pbnet";
 
 import "Common.proto";
+
+message RespRawData {  
+  // 类型标识
+   sint32 typeSign=1;
+  // 原始数据
+   bytes data=2;
+  }
+
+message RespFullyLst {//1
+  repeated RespRawData resps=1;
+}
+
 //玩家信息
 message RespPlayerInfo { 
   // id
@@ -11,7 +23,11 @@ message RespPlayerInfo {
   // 昵称
   string name=3;
 }
-message Msg_G2C_PlayerPing{//2
+message RespHeartBeat {//2
+
+}
+
+message Msg_G2C_PlayerPing{//3
 
   sint32 localId=1;
   sint64 sendTimestamp=2;

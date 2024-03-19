@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-namespace GameFramework
+﻿namespace GameFramework
 {
     /// <summary>
     /// 事件基类。

@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2020 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
-
+﻿
 using GameFramework;
 using GameFramework.Event;
 
@@ -13,7 +7,7 @@ namespace UnityGameFramework.Runtime
     /// <summary>
     /// 打开界面更新事件。
     /// </summary>
-    public sealed class OpenUIFormUpdateEventArgs : GameEventArgs
+    public sealed class OpenUIFormUpdateEventArgs : BaseEventArgs
     {
         /// <summary>
         /// 打开界面更新事件编号。

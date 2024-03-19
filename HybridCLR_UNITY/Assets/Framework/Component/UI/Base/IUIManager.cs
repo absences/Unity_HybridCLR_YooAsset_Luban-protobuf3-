@@ -17,7 +17,7 @@ namespace GameFramework.UI
     /// <summary>
     /// 界面管理器接口。
     /// </summary>
-    public interface IUIManager
+    internal interface IUIManager
     {
         /// <summary>
         /// 获取界面组数量。

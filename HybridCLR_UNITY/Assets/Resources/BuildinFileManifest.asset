@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b02dfa7aa9d4545b3417a18477fbee, type: 3}
+  m_Name: BuildinFileManifest
+  m_EditorClassIdentifier: 
+  BuildinFiles:
+  - PackageName: assetPackage
+    FileName: 042a455d8e033e04b91a8ec22c7f9c0a.bundle
+    FileCRC32: d6844c09
+  - PackageName: assetPackage
+    FileName: 345589219d7a241443f588d7c0c7f23c.bundle
+    FileCRC32: f5e52c99
+  - PackageName: assetPackage
+    FileName: 3658b2cfdd619e07abaa0dcdb530ec81.bundle
+    FileCRC32: 2ff261eb
+  - PackageName: assetPackage
+    FileName: 39857446fcea35db4818215ebf479993.bundle
+    FileCRC32: 835d50d5
+  - PackageName: assetPackage
+    FileName: 6943f6f04f3c2ca109d608866e8443c4.bundle
+    FileCRC32: 01d3f66c
+  - PackageName: assetPackage
+    FileName: 84bdc450382d1dbfb61238470e5cbb85.bundle
+    FileCRC32: 2bc39f4c
+  - PackageName: assetPackage
+    FileName: ac019bff6d6659fc772ec49bba4c59d7.bundle
+    FileCRC32: 3cd4e4f3
+  - PackageName: assetPackage
+    FileName: b3be03a4c30f52b7a54cb307331ee04c.bundle
+    FileCRC32: ff2b03fa
+  - PackageName: assetPackage
+    FileName: c668860898fe1484d92c7a563370de5f.bundle
+    FileCRC32: 0446f692
+  - PackageName: assetPackage
+    FileName: d44b6f185c4be95b655c3322f48849a4.bundle
+    FileCRC32: c3a17602
+  - PackageName: assetPackage
+    FileName: e4faa9a8e5bd6ece468e4dd02e654b1f.bundle
+    FileCRC32: 01bca2ce
+  - PackageName: rawfilePackage
+    FileName: 0afeb393aa174d93ed7acdc908f4c314.rawfile
+    FileCRC32: da8cc4e3
+  - PackageName: rawfilePackage
+    FileName: 0e44620886c0e6492165bacc1040f65c.rawfile
+    FileCRC32: 774ef138
+  - PackageName: rawfilePackage
+    FileName: 0f5f9735eed33c88112fae79b50b459b.rawfile
+    FileCRC32: 9736993b
+  - PackageName: rawfilePackage
+    FileName: 24bd8777238e3abf8232609a6ae5c696.rawfile
+    FileCRC32: 4b26bde0
+  - PackageName: rawfilePackage
+    FileName: 273b7e89485f75771c4b3eb38bbfc453.rawfile
+    FileCRC32: b6bc2222
+  - PackageName: rawfilePackage
+    FileName: 2bdbd2b6d44e1509f7a8c8f4125e3f6b.rawfile
+    FileCRC32: 16bc92ad
+  - PackageName: rawfilePackage
+    FileName: 2dc14e8ac04ac378db1ce1f2e9606a2c.rawfile
+    FileCRC32: 6e895248
+  - PackageName: rawfilePackage
+    FileName: 3bd39713682c05f4a90cb9d1d1dd05dc.rawfile
+    FileCRC32: fd5bb3b7
+  - PackageName: rawfilePackage
+    FileName: 50d6e5e1165efdeee0c37744e88a2385.rawfile
+    FileCRC32: 2ceaddc9
+  - PackageName: rawfilePackage
+    FileName: 5942f2588ecfe36bb1630e587e359065.rawfile
+    FileCRC32: 2868bf76
+  - PackageName: rawfilePackage
+    FileName: 6203656021b6e306f0388c7cdd491d47.rawfile
+    FileCRC32: de7dce8b
+  - PackageName: rawfilePackage
+    FileName: 97b1457c0dc884304d05620ab0bb3ef8.rawfile
+    FileCRC32: 5d3d50bf
+  - PackageName: rawfilePackage
+    FileName: 9a18115dcc372abe21c110d2d4117930.rawfile
+    FileCRC32: e62d7582
+  - PackageName: rawfilePackage
+    FileName: b7ec85bd02fdb5b8f8cf227fb980cba0.rawfile
+    FileCRC32: 12cc5d97
+  - PackageName: rawfilePackage
+    FileName: d508b60b186ef3dd334b6661492b6a06.rawfile
+    FileCRC32: f2f4ac48
+  - PackageName: rawfilePackage
+    FileName: e145d6dd562ae607bb3770af61e2f135.rawfile
+    FileCRC32: 38e8afed
+  - PackageName: rawfilePackage
+    FileName: e7de27ceefa5607d73a0f7f486bcba5d.rawfile
+    FileCRC32: f8515ce7
+  - PackageName: rawfilePackage
+    FileName: f3c7b8acafd16765fc46ffba46fc8b67.mp4
+    FileCRC32: 7b60c046
+  - PackageName: rawfilePackage
+    FileName: f6eb736005a7683202827ed8a8e71271.rawfile
+    FileCRC32: 8ef9b5d0
+  - PackageName: rawfilePackage
+    FileName: fbd4fe1b3e6bac25d6a9a4bd5813f993.rawfile
+    FileCRC32: 6e396af8

@@ -27,7 +27,9 @@ namespace YooAsset
         /// </summary>
         public bool Encrypted;
     }
-
+    /// <summary>
+    /// 获取分发的资源包对象服务
+    /// </summary>
     public interface IDeliveryLoadServices
     {
         /// <summary>

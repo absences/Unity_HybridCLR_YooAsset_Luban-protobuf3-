@@ -11,6 +11,240 @@ using scg = global::System.Collections.Generic;
 namespace pbnet {
 
   #region Messages
+  public sealed partial class RespRawData : pb::IMessage<RespRawData>
+  {
+    private static readonly pb::MessageParser<RespRawData> _parser = new pb::MessageParser<RespRawData>(() => new RespRawData());
+    private pb::UnknownFieldSet _unknownFields;
+    public static pb::MessageParser<RespRawData> Parser { get { return _parser; } }
+
+    public RespRawData() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    public RespRawData(RespRawData other) : this() {
+      typeSign_ = other.typeSign_;
+      data_ = other.data_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    public RespRawData Clone() {
+      return new RespRawData(this);
+    }
+
+    /// <summary>Field number for the "typeSign" field.</summary>
+    public const int TypeSignFieldNumber = 1;
+    private int typeSign_;
+    /// <summary>
+    /// 类型标识
+    /// </summary>
+    public int TypeSign {
+      get { return typeSign_; }
+      set {
+        typeSign_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "data" field.</summary>
+    public const int DataFieldNumber = 2;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    /// <summary>
+    /// 原始数据
+    /// </summary>
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    public override bool Equals(object other) {
+      return Equals(other as RespRawData);
+    }
+
+    public bool Equals(RespRawData other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TypeSign != other.TypeSign) return false;
+      if (Data != other.Data) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TypeSign != 0) hash ^= TypeSign.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TypeSign != 0) {
+        output.WriteRawTag(8);
+        output.WriteSInt32(TypeSign);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Data);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (TypeSign != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt32Size(TypeSign);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    public void MergeFrom(RespRawData other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TypeSign != 0) {
+        TypeSign = other.TypeSign;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TypeSign = input.ReadSInt32();
+            break;
+          }
+          case 18: {
+            Data = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  /// <summary>
+  ///1
+  /// </summary>
+  public sealed partial class RespFullyLst : pb::IMessage<RespFullyLst>
+  {
+    private static readonly pb::MessageParser<RespFullyLst> _parser = new pb::MessageParser<RespFullyLst>(() => new RespFullyLst());
+    private pb::UnknownFieldSet _unknownFields;
+    public static pb::MessageParser<RespFullyLst> Parser { get { return _parser; } }
+
+    /// <summary>协议ID </summary>
+    public const int ID = 1;
+    public RespFullyLst() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    public RespFullyLst(RespFullyLst other) : this() {
+      resps_ = other.resps_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    public RespFullyLst Clone() {
+      return new RespFullyLst(this);
+    }
+
+    /// <summary>Field number for the "resps" field.</summary>
+    public const int RespsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::pbnet.RespRawData> _repeated_resps_codec
+        = pb::FieldCodec.ForMessage(10, global::pbnet.RespRawData.Parser);
+    private readonly pbc::RepeatedField<global::pbnet.RespRawData> resps_ = new pbc::RepeatedField<global::pbnet.RespRawData>();
+    public pbc::RepeatedField<global::pbnet.RespRawData> Resps {
+      get { return resps_; }
+    }
+
+    public override bool Equals(object other) {
+      return Equals(other as RespFullyLst);
+    }
+
+    public bool Equals(RespFullyLst other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!resps_.Equals(other.resps_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= resps_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      resps_.WriteTo(output, _repeated_resps_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      size += resps_.CalculateSize(_repeated_resps_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    public void MergeFrom(RespFullyLst other) {
+      if (other == null) {
+        return;
+      }
+      resps_.Add(other.resps_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            resps_.AddEntriesFrom(input, _repeated_resps_codec);
+            break;
+          }
+        }
+      }
+    }
+  }
+
   /// <summary>
   ///玩家信息
   /// </summary>
@@ -179,6 +413,86 @@ namespace pbnet {
   /// <summary>
   ///2
   /// </summary>
+  public sealed partial class RespHeartBeat : pb::IMessage<RespHeartBeat>
+  {
+    private static readonly pb::MessageParser<RespHeartBeat> _parser = new pb::MessageParser<RespHeartBeat>(() => new RespHeartBeat());
+    private pb::UnknownFieldSet _unknownFields;
+    public static pb::MessageParser<RespHeartBeat> Parser { get { return _parser; } }
+
+    /// <summary>协议ID </summary>
+    public const int ID = 2;
+    public RespHeartBeat() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    public RespHeartBeat(RespHeartBeat other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    public RespHeartBeat Clone() {
+      return new RespHeartBeat(this);
+    }
+
+    public override bool Equals(object other) {
+      return Equals(other as RespHeartBeat);
+    }
+
+    public bool Equals(RespHeartBeat other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    public void MergeFrom(RespHeartBeat other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+  }
+
+  /// <summary>
+  ///3
+  /// </summary>
   public sealed partial class Msg_G2C_PlayerPing : pb::IMessage<Msg_G2C_PlayerPing>
   {
     private static readonly pb::MessageParser<Msg_G2C_PlayerPing> _parser = new pb::MessageParser<Msg_G2C_PlayerPing>(() => new Msg_G2C_PlayerPing());
@@ -186,7 +500,7 @@ namespace pbnet {
     public static pb::MessageParser<Msg_G2C_PlayerPing> Parser { get { return _parser; } }
 
     /// <summary>协议ID </summary>
-    public const int ID = 2;
+    public const int ID = 3;
     public Msg_G2C_PlayerPing() {
       OnConstruction();
     }

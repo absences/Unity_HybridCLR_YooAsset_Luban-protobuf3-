@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-namespace GameFramework.UI
+﻿namespace GameFramework.UI
 {
     /// <summary>
     /// 关闭界面完成事件。

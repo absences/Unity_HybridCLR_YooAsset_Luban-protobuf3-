@@ -1,4 +1,5 @@
 ﻿using GameFramework;
+using GameInit;
 using GameMain;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,12 @@ public class GameEnter : MonoBehaviour
         GameFrameworkLog.SetLogHelper(new DinLogHelper());
 
         DontDestroyOnLoad(gameObject);
+
+
+    }
+    private void Start()
+    {
+        Procedure.Init();
     }
 
     #region GameSpeed
@@ -85,6 +92,15 @@ public class GameEnter : MonoBehaviour
             case UIComponent uiComponent:
                 UI = uiComponent;
                 break;
+            case EventComponent eventComponent:
+                Event = eventComponent;
+                break;
+            case ProcedureComponent procedureComponent:
+                Procedure = procedureComponent;
+                break;
+            case NetworkComponent networkComponent:
+                Network = networkComponent;
+                break;
         }
     }
 
@@ -101,5 +117,11 @@ public class GameEnter : MonoBehaviour
     public static ObjectPoolComponent ObjectPool { private set; get; }
 
     public static UIComponent UI { private set; get; }
+
+    public static EventComponent Event { private set; get; }
+
+    public static ProcedureComponent Procedure { private set; get; }
+
+    public static NetworkComponent Network { private set; get; }
     #endregion
 }

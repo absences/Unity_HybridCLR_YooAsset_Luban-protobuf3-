@@ -21,8 +21,7 @@ public class FsmComponent : BaseGameComponent
     public IFsmManager FsmManager
     {
         get { 
-            if (m_FsmManager == null)
-                m_FsmManager = new FsmManager();
+            m_FsmManager ??= new FsmManager();
             return m_FsmManager;
         }
     }

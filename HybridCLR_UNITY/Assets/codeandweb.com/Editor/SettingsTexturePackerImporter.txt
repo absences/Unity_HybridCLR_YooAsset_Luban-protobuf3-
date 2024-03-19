@@ -1,0 +1,9 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/Builds/Texture/emotion.tpsheet
+textureFileNames:
+- Assets/Builds/Texture/emotion.png
+normalmapFileNames:
+- 
+enableDebugOutput: 0
