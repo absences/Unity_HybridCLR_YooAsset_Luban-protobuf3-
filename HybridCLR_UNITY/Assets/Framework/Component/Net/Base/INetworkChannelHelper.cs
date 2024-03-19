@@ -30,15 +30,6 @@ namespace GameFramework.Network
         bool SendHeartBeat();
 
         /// <summary>
-        /// 序列化消息包。
-        /// </summary>
-        /// <typeparam name="T">消息包类型。</typeparam>
-        /// <param name="packet">要序列化的消息包。</param>
-        /// <param name="destination">要序列化的目标流。</param>
-        /// <returns>是否序列化成功。</returns>
-        bool Serialize<T>(T packet, Stream destination) where T : IMessage;
-
-        /// <summary>
         /// 反序列化消息包。
         /// </summary>
         /// <param name="packetHeader">消息包头。</param>

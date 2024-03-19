@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using GameFramework;
 using GameFramework.Network;
 using System;
@@ -11,7 +11,7 @@ using UnityEngine;
 internal class NetworkManager : INetworkManager
 {
     /// <summary>
-    /// »ñÈ¡ÍøÂçÆµµÀÊıÁ¿¡£
+    /// è·å–ç½‘ç»œé¢‘é“æ•°é‡ã€‚
     /// </summary>
     public int NetworkChannelCount
     {
@@ -52,6 +52,9 @@ internal class NetworkManager : INetworkManager
         {
             case ServiceType.Tcp:
                 networkChannel = new TcpNetworkChannel(name, networkChannelHelper);
+                break;
+            case ServiceType.Kcp:
+                networkChannel = new KcpNetworkChannel(name, 50001, networkChannelHelper);
                 break;
         }
         networkChannel.NetworkChannelConnected += OnNetworkChannelConnected;
@@ -123,10 +126,10 @@ internal class NetworkManager : INetworkManager
         return m_NetworkChannels.ContainsKey(name ?? string.Empty);
     }
     /// <summary>
-    /// ÍøÂç¹ÜÀíÆ÷ÂÖÑ¯¡£
+    /// ç½‘ç»œç®¡ç†å™¨è½®è¯¢ã€‚
     /// </summary>
-    /// <param name="elapseSeconds">Âß¼­Á÷ÊÅÊ±¼ä£¬ÒÔÃëÎªµ¥Î»¡£</param>
-    /// <param name="realElapseSeconds">ÕæÊµÁ÷ÊÅÊ±¼ä£¬ÒÔÃëÎªµ¥Î»¡£</param>
+    /// <param name="elapseSeconds">é€»è¾‘æµé€æ—¶é—´ï¼Œä»¥ç§’ä¸ºå•ä½ã€‚</param>
+    /// <param name="realElapseSeconds">çœŸå®æµé€æ—¶é—´ï¼Œä»¥ç§’ä¸ºå•ä½ã€‚</param>
     public void Update(float elapseSeconds, float realElapseSeconds)
     {
         foreach (var networkChannel in m_NetworkChannels.Values)
@@ -150,7 +153,7 @@ internal class NetworkManager : INetworkManager
         m_NetworkChannels.Clear();
     }
     /// <summary>
-    /// ÍøÂçÁ¬½Ó³É¹¦ÊÂ¼ş¡£
+    /// ç½‘ç»œè¿æ¥æˆåŠŸäº‹ä»¶ã€‚
     /// </summary>
     public event EventHandler<NetworkConnectedEventArgs> NetworkConnected
     {
@@ -165,7 +168,7 @@ internal class NetworkManager : INetworkManager
     }
 
     /// <summary>
-    /// ÍøÂçÁ¬½Ó¹Ø±ÕÊÂ¼ş¡£
+    /// ç½‘ç»œè¿æ¥å…³é—­äº‹ä»¶ã€‚
     /// </summary>
     public event EventHandler<NetworkClosedEventArgs> NetworkClosed
     {
@@ -180,7 +183,7 @@ internal class NetworkManager : INetworkManager
     }
 
     /// <summary>
-    /// ÍøÂçĞÄÌø°ü¶ªÊ§ÊÂ¼ş¡£
+    /// ç½‘ç»œå¿ƒè·³åŒ…ä¸¢å¤±äº‹ä»¶ã€‚
     /// </summary>
     public event EventHandler<NetworkMissHeartBeatEventArgs> NetworkMissHeartBeat
     {
@@ -195,7 +198,7 @@ internal class NetworkManager : INetworkManager
     }
 
     /// <summary>
-    /// ÍøÂç´íÎóÊÂ¼ş¡£
+    /// ç½‘ç»œé”™è¯¯äº‹ä»¶ã€‚
     /// </summary>
     public event EventHandler<NetworkErrorEventArgs> NetworkError
     {
@@ -210,7 +213,7 @@ internal class NetworkManager : INetworkManager
     }
 
     /// <summary>
-    /// ÓÃ»§×Ô¶¨ÒåÍøÂç´íÎóÊÂ¼ş¡£
+    /// ç”¨æˆ·è‡ªå®šä¹‰ç½‘ç»œé”™è¯¯äº‹ä»¶ã€‚
     /// </summary>
     public event EventHandler<NetworkCustomErrorEventArgs> NetworkCustomError
     {

@@ -38,10 +38,12 @@ namespace HotfixMain
             }
             return false;
         }
-
-        public bool Serialize<T>(T packet, Stream destination) where T : IMessage
+        public void Send(int msgID, IMessage msg)
         {
-            throw new System.NotImplementedException();
+            if (_networkChannel.Connected)
+            {
+                _networkChannel.Send(msgID, msg);
+            }
         }
 
         public void Shutdown()
@@ -137,6 +139,10 @@ namespace HotfixMain
                     if (resp.TypeSign == RespHeartBeat.ID)
                     {
                         customErrorData = RespHeartBeat.Parser.ParseFrom(resp.Data);
+                    }
+                    else if(resp.TypeSign== Msg_G2C_JoinSuccess.ID)
+                    {
+                        Log.Info(resp.TypeSign);
                     }
                 }
                 return resps;

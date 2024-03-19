@@ -13,10 +13,9 @@ namespace GameFramework.Network
         /// TCP 网络服务。
         /// </summary>
         Tcp = 0,
-
         /// <summary>
-        /// 使用同步接收的 TCP 网络服务。
+        /// 快速可靠udp协议
         /// </summary>
-        TcpWithSyncReceive
+        Kcp
     }
 }

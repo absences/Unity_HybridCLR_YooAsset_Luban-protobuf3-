@@ -1,14 +1,10 @@
-﻿using GameFramework.Network;
-using Google.Protobuf;
+﻿using Google.Protobuf;
 using pbnet;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using UnityEngine;
-
+using Telepathy;
 namespace GameFramework.Network
 {
     /// <summary>
@@ -23,7 +19,7 @@ namespace GameFramework.Network
 
         public virtual ServiceType ServiceType => throw new NotImplementedException();
 
-        public virtual AddressFamily AddressFamily => m_AddressFamily;
+        public AddressFamily AddressFamily => m_AddressFamily;
 
         /// <summary>
         /// 获取累计发送的消息包数量。
@@ -112,7 +108,13 @@ namespace GameFramework.Network
                 m_HeartBeatState.Reset(true);
             }
         }
-
+        protected ArraySegment<byte> Encode(int commandID, IMessage msg)
+        {
+            sendBuffer.Seek(0, SeekOrigin.Begin);
+            Utils.WriteIntBigEndian(commandID, sendBuffer);
+            msg.WriteTo(sendBuffer);
+            return new ArraySegment<byte>(sendBuffer.GetBuffer(), 0, (int)sendBuffer.Position);
+        }
 
         private readonly string m_Name;
 
@@ -121,7 +123,7 @@ namespace GameFramework.Network
         /// <summary>
         /// 心跳间隔
         /// </summary>
-        private const float DefaultHeartBeatInterval = 5;
+        protected const float DefaultHeartBeatInterval = 5;
         /// <summary>
         /// buffer长度
         /// </summary>
@@ -143,7 +145,7 @@ namespace GameFramework.Network
 
             m_Active = false;
             m_HeartBeatState = new HeartBeatState();
-            m_HeartBeatInterval = DefaultHeartBeatInterval;
+            
             sendBuffer = new MemoryStream(DefaultBufferLength);
             m_ResetHeartBeatElapseSecondsWhenReceivePacket = false;
 
