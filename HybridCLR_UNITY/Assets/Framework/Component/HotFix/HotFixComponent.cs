@@ -4,6 +4,7 @@ using HybridCLR;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ public class HotFixComponent : BaseGameComponent
         HomologousImageMode mode = HomologousImageMode.SuperSet;
 
         var resource = GameEnter.Resource;
+
         foreach (var aotDllName in aotMetaAssemblyFiles)
         {
             using var handle = resource.LoadRawFileAsync(aotDllName);
@@ -35,6 +37,12 @@ public class HotFixComponent : BaseGameComponent
         }
 
         {
+
+#if UNITY_EDITOR
+            var assembly = Utility.Assembly.GetAssemblies().First(a => a.GetName().Name == "MonoHot");
+            s_Assemblies[0] = assembly;
+            gameObject.AddComponent(assembly.GetType("MonoHotEnter"));
+#else
             using var handle = resource.LoadRawFileAsync("MonoHot");//mono 
             await handle.ToUniTask(this);
             if(handle.Status== YooAsset.EOperationStatus.Succeed)
@@ -45,13 +53,20 @@ public class HotFixComponent : BaseGameComponent
             }
             else
                 Log.Warning(handle.LastError);
+
+#endif
+
         }
         {
-            using var handle = resource.LoadRawFileAsync("ildll");//hotfix main
+             using var handle = resource.LoadRawFileAsync("ildll");//hotfix main
+           // using var handle = resource.LoadAssetAsync<TextAsset>("ildll");
             await handle.ToUniTask(this);
+
             if (handle.Status == YooAsset.EOperationStatus.Succeed)
             {
                 Assembly assembly = Assembly.Load(handle.GetRawFileData());
+                //Assembly assembly = Assembly.Load((handle.AssetObject as TextAsset).bytes);
+
                 s_Assemblies[1] = assembly;
 
                 Type entryType = assembly.GetType("HotfixMain.HotFixActivity");
@@ -102,7 +117,7 @@ public class HotFixComponent : BaseGameComponent
         {
             if (typePair.Key.EndsWith(typeName))
             {
-                return typePair.Value;  
+                return typePair.Value;
             }
         }
         return null;
