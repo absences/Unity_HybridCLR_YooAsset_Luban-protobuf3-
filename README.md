@@ -27,3 +27,6 @@ https://github.com/focus-creative-games/hybridclr
 https://github.com/KumoKyaku/kcp
 
 https://github.com/MirrorNetworking/Telepathy
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=absences/Unity_HybridCLR_YooAsset_Luban-protobuf3-&type=Date)](https://www.star-history.com/#absences/Unity_HybridCLR_YooAsset_Luban-protobuf3-&Date)
